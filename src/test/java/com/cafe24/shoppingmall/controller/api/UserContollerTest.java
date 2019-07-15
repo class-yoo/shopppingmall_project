@@ -56,18 +56,14 @@ public class UserContollerTest {
 		assertNotNull(userService);
 	}
 	
-	@Ignore
 	@Test
 	public void checkOverlapIdTest() throws Exception {
-		// url로 찌를때 mockMvc를 사용한다.
-		// VIEW 없이도 웹 개발을 할 수 있는 방식
 		ResultActions resultActions = mockMvc
-						.perform(get("/api/user/checkid/{id}", "cafe24")
+						.perform(get("/api/user/checkid/{id}", "abcd")
 						.contentType(MediaType.APPLICATION_JSON));
 		
-		resultActions.andExpect(status().isOk()).andDo(print())
-		.andExpect(jsonPath("$.result", is("success")))
-		.andExpect(jsonPath("$.data", is(true)));
+		resultActions.andExpect(status().isBadRequest()).andDo(print())
+		.andExpect(jsonPath("$.result", is("fail")));
 	}
 	
 	@Ignore
@@ -90,11 +86,9 @@ public class UserContollerTest {
 		resultActions.andExpect(status().isOk()).andDo(print())
 		.andExpect(jsonPath("$.result", is("success")))
 		.andExpect(jsonPath("$.data", is(true)));
-		
-		
-		
 	}
 	
+	@Ignore
 	@Test
 	public void loginTest() throws Exception {
 		UserVo userVo = new UserVo();

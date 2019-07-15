@@ -36,12 +36,40 @@ public class UserAPIContoller {
 	@Autowired
 	private UserService userService;
 
-	@ApiOperation(value = "이메일 존재 여부")
+	/**
+	 * 기능 : 아이디 중복 확인
+	 * 
+	 * @param id - 중복을 검사할 아이디
+	 * @return
+	 * 
+	 */
+	
+	@ApiOperation(value = "아이디 존재 여부")
 	@RequestMapping(value = "/checkid/{id}", method = RequestMethod.GET)
-	public JSONResult checkId(@PathVariable(value = "id") String id) {
-
-		boolean emailOverlapCheckResult = userService.checkOverapId(id);
-		return JSONResult.success(emailOverlapCheckResult);
+	public ResponseEntity<JSONResult> checkId(@PathVariable(value = "id") String id) {
+		
+		Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+		
+		Set<ConstraintViolation<UserVo>> validatorResults = validator.validateProperty(new UserVo(id), "id");
+		
+		HttpStatus status = HttpStatus.OK;
+		String message = null;
+		JSONResult result = JSONResult.success(true);
+		if(validatorResults.isEmpty() == false) {
+			for(ConstraintViolation<UserVo> validatorResult : validatorResults ) {
+				message = validatorResult.getMessage();
+				status = HttpStatus.BAD_REQUEST;
+				result = JSONResult.fail(message);
+				return makeResponseEntity(status, result);
+			}
+		}
+		boolean overlapCheckResult = userService.checkOverapId(id);
+		if(overlapCheckResult) {
+			message = "중복된 아이디가 있습니다!!";
+			status = HttpStatus.BAD_REQUEST;
+			result = JSONResult.fail(message);
+		}
+		return makeResponseEntity(status, result);
 	}
 
 	@ApiOperation(value = "회원가입")
@@ -62,11 +90,11 @@ public class UserAPIContoller {
 
 		// UserVo의 email 필드에 선언된 validation만 적용한다.
 		Set<ConstraintViolation<UserVo>> validatorResults = validator.validateProperty(userVo, "id");
-		
+
 		if (validatorResults.isEmpty() == false) {
 			String message = messageSource.getMessage("Email.userVo.email", null, LocaleContextHolder.getLocale());
 			JSONResult result = JSONResult.fail(message);
-			
+
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
 		}
 
@@ -74,5 +102,10 @@ public class UserAPIContoller {
 
 		return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success("loginSuccess"));
 
+	}
+	
+	
+	public ResponseEntity<JSONResult> makeResponseEntity(HttpStatus status, JSONResult jsonResult){
+		return ResponseEntity.status(status).body(jsonResult);
 	}
 }

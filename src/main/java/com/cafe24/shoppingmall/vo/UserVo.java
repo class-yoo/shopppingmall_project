@@ -6,10 +6,11 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.cafe24.shoppingmall.validator.constraint.user.ValidUserId;
+
 public class UserVo {
 	
-	@NotEmpty
-	@Length(min=4, max=20, message="아이디는 4자 이상 12자 이하로 입력해야 합니다.")
+	@ValidUserId
 	private String id;
 	
 	@Email
@@ -42,6 +43,10 @@ public class UserVo {
 		this.password = password;
 	}
 
+	public UserVo(String id) {
+		this.id = id;
+	}
+	
 	public String getId() {
 		return id;
 	}
