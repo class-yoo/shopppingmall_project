@@ -67,7 +67,7 @@ public class UserContollerTest {
 		.andExpect(jsonPath("$.result", is("fail")));
 	}
 	
-
+	@Ignore
 	@Test
 	public void joinTest() throws Exception {
 		UserVo userVo = new UserVo();
@@ -89,11 +89,10 @@ public class UserContollerTest {
 		.andExpect(jsonPath("$.data", is(true)));
 	}
 	
-	@Ignore
 	@Test
 	public void loginTest() throws Exception {
 		UserVo userVo = new UserVo();
-		userVo.setId("hgd888");
+		userVo.setId("hgdkk");
 		userVo.setPassword("1234");
 		
 		ResultActions resultActions = mockMvc
@@ -101,9 +100,10 @@ public class UserContollerTest {
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(new Gson().toJson(userVo)));
 		
-		resultActions.andExpect(status().isOk()).andDo(print())
+		resultActions.andExpect(status().isBadRequest()).andDo(print())
 		.andExpect(jsonPath("$.result", is("success")))
-		.andExpect(jsonPath("$.data", is("loginSuccess")));
+		.andExpect(jsonPath("$.data.id", is("hgdkk")))
+		.andExpect(jsonPath("$.data.name", is("홍길동")));
 	}
 	
 }

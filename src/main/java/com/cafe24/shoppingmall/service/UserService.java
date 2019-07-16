@@ -33,10 +33,8 @@ public class UserService {
 	}
 
 	public UserVo login(UserVo userVo) {
-		
-		UserVo loginUserVo = new UserVo();
-		loginUserVo.setId("hgd888");
-		loginUserVo.setName("홍길동");
+		userVo.setName("홍길동");
+		UserVo loginUserVo = userVo;
 		
 		return loginUserVo;
 	}
