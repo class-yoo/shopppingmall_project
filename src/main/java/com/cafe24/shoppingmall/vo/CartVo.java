@@ -6,6 +6,7 @@ public class CartVo {
 	private int amount;
 	private String userId;
 	private Long displayedProductNo;
+	private DisplayedProductVo displayedProduct;
 
 	public Long getNo() {
 		return no;
@@ -30,13 +31,21 @@ public class CartVo {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-
+	
 	public Long getDisplayedProductNo() {
 		return displayedProductNo;
 	}
 
 	public void setDisplayedProductNo(Long displayedProductNo) {
 		this.displayedProductNo = displayedProductNo;
+	}
+
+	public DisplayedProductVo getDisplayedProduct() {
+		return displayedProduct;
+	}
+
+	public void setDisplayedProduct(DisplayedProductVo displayedProduct) {
+		this.displayedProduct = displayedProduct;
 	}
 
 	@Override

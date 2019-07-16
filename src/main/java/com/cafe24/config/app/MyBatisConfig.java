@@ -22,14 +22,11 @@ public class MyBatisConfig {
 		return sqlSessionFactoryBean.getObject();
 	}
 	
-//	<!-- MyBatis SqlSessionTemplate --> 
-//	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-//		<constructor-arg index="0" ref="sqlSessionFactory" />
-//	</bean>
-	
 	@Bean
 	public SqlSessionTemplate sqlSession(SqlSessionFactory sqlSessionFactory) {
-		return new SqlSessionTemplate(sqlSessionFactory);
+		SqlSessionTemplate sqlSessionTemplate = new SqlSessionTemplate(sqlSessionFactory);
+		sqlSessionTemplate.clearCache();
+		return sqlSessionTemplate;
 	}
 	
 }

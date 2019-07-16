@@ -35,7 +35,7 @@ public class UserVo {
 	
 	@NotEmpty
 	private String gender;
-	private boolean isWithdrawal;
+	private String isWithdrawal;
 
 	public UserVo() {}
 	
@@ -104,11 +104,11 @@ public class UserVo {
 		this.gender = gender;
 	}
 
-	public boolean isWithdrawal() {
+	public String getIsWithdrawal() {
 		return isWithdrawal;
 	}
 
-	public void setWithdrawal(boolean isWithdrawal) {
+	public void setIsWithdrawal(String isWithdrawal) {
 		this.isWithdrawal = isWithdrawal;
 	}
 

@@ -11,33 +11,25 @@ public class UserService {
 
 	@Autowired
 	private UserDao userDao;
-	
-	
+
 	public boolean checkOverapId(String id) {
-		
-		boolean checkOverapResult = true;
-		
-		return checkOverapResult;
+
+		String userId = userDao.selectUserByUserId(id);
+		return userId == null ? false : true;
 	}
 
 	public boolean join(UserVo userVo) {
-		
-		boolean joinResult = true;
-		
-		return joinResult;
-	}
-	
-	public UserVo getUser(UserVo userVo) {
-		// TODO Auto-generated method stub
-		return null;
+
+		int joinResult = userDao.insertUser(userVo);
+
+		return joinResult == 1 ? true : false;
 	}
 
 	public UserVo login(UserVo userVo) {
-		userVo.setName("홍길동");
-		UserVo loginUserVo = userVo;
+		
+		UserVo loginUserVo = userDao.selectUserByUserIdAndPassword(userVo);
 		
 		return loginUserVo;
 	}
-	
-	
+
 }

@@ -129,7 +129,7 @@ public class UserAPIContoller {
 		
 		UserVo loginUserVo = userService.login(userVo);
 		
-		if(loginUserVo != null) {
+		if(loginUserVo == null) {
 			message = "아이디와 비밀번호를 확인하세요.";
 			status = HttpStatus.BAD_REQUEST;
 			jsonResult = JSONResult.fail(message);

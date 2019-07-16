@@ -9,28 +9,24 @@ import org.springframework.stereotype.Repository;
 
 import com.cafe24.shoppingmall.vo.UserVo;
 
-
 @Repository
 public class UserDao {
-	
+
 	@Autowired
 	private SqlSession sqlSession;
-	
-	public UserVo get(String id) {
-		UserVo userVo = sqlSession.selectOne("user.getById", id);
-		return userVo;
+
+	public String selectUserByUserId(String id) {
+		String userId = sqlSession.selectOne("user.selectUserByUserId", id);
+		return userId;
 	}
-	
-	
-	
-	public UserVo get(String id, String password) {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("id", id);
-		map.put("password", password);
-		UserVo userVo = sqlSession.selectOne("user.getByEmailAndPassword", map);
-		
-		return userVo;
+
+	public int insertUser(UserVo userVo) {
+		int insertUserResult = sqlSession.insert("user.insertUser", userVo);
+		return insertUserResult;
 	}
-	
-	
+
+	public UserVo selectUserByUserIdAndPassword(UserVo userVo) {
+		UserVo loginUser = sqlSession.selectOne("user.selectUserByUserIdAndPassword", userVo);
+		return loginUser;
+	}
 }

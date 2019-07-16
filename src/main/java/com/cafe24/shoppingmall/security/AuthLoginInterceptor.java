@@ -26,7 +26,7 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 		UserService userService = ac.getBean(UserService.class);
 		UserVo userVo = new UserVo(email, password);
 		
-		UserVo authUser = userService.getUser(userVo);
+		UserVo authUser = userService.login(userVo);
 		if(authUser == null) {
 			response.sendRedirect(request.getContextPath()+"/user/login");
 			return false;

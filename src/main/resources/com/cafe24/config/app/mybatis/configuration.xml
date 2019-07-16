@@ -2,10 +2,10 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-<!-- 		<typeAlias type="com.cafe24.mysite.vo.GuestbookVo" alias="guestbookvo"/> -->
+		<typeAlias type="com.cafe24.shoppingmall.vo.UserVo" alias="uservo"/>
 	</typeAliases>
 	<mappers>
-		 <!-- <mapper resource="com/cafe24/config/app/mybatis/mapper/board.xml" /> -->
+		 <mapper resource="com/cafe24/config/app/mybatis/mapper/user.xml"/>
 	</mappers>
 </configuration>
 
