@@ -56,6 +56,7 @@ public class UserContollerTest {
 		assertNotNull(userService);
 	}
 	
+	@Ignore
 	@Test
 	public void checkOverlapIdTest() throws Exception {
 		ResultActions resultActions = mockMvc
@@ -66,18 +67,18 @@ public class UserContollerTest {
 		.andExpect(jsonPath("$.result", is("fail")));
 	}
 	
-	@Ignore
+
 	@Test
 	public void joinTest() throws Exception {
 		UserVo userVo = new UserVo();
-		userVo.setId("hgd888");
+		userVo.setId("hgda");
 		userVo.setName("홍길동");
-		userVo.setPassword("1234");
+		userVo.setPassword("1234aaaa@@");
 		userVo.setGender("M");
+		userVo.setBirth("2019-07-29");
 		userVo.setContact("010-0000-0000");
 		userVo.setEmail("hgd888@cafe24.com");
 		
-		// VIEW 없이도 웹 개발을 할 수 있는 방식
 		ResultActions resultActions = mockMvc
 						.perform(post("/api/user/join")
 						.contentType(MediaType.APPLICATION_JSON)

@@ -1,5 +1,6 @@
 package com.cafe24.shoppingmall.controller.api;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,8 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,53 +57,87 @@ public class UserAPIContoller {
 		
 		HttpStatus status = HttpStatus.OK;
 		String message = null;
-		JSONResult result = JSONResult.success(true);
+		JSONResult jsonResult = JSONResult.success(true);
+		
 		if(validatorResults.isEmpty() == false) {
 			for(ConstraintViolation<UserVo> validatorResult : validatorResults ) {
 				message = validatorResult.getMessage();
 				status = HttpStatus.BAD_REQUEST;
-				result = JSONResult.fail(message);
-				return makeResponseEntity(status, result);
+				jsonResult = JSONResult.fail(message);
+				return makeResponseEntity(status, jsonResult);
 			}
 		}
 		boolean overlapCheckResult = userService.checkOverapId(id);
 		if(overlapCheckResult) {
 			message = "중복된 아이디가 있습니다!!";
 			status = HttpStatus.BAD_REQUEST;
-			result = JSONResult.fail(message);
+			jsonResult = JSONResult.fail(message);
 		}
-		return makeResponseEntity(status, result);
+		return makeResponseEntity(status, jsonResult);
 	}
 
+	
 	@ApiOperation(value = "회원가입")
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public JSONResult join(@RequestBody @Valid UserVo userVo) {
-
+	public ResponseEntity<JSONResult> join(@RequestBody @Valid UserVo userVo , BindingResult result) {
+		
+		HttpStatus status = HttpStatus.OK;
+		JSONResult jsonResult = JSONResult.success(true);
+		String message = null;
+		
+		if( result.hasErrors() ) {
+			List<ObjectError> list = result.getAllErrors();
+			for(ObjectError error : list) {
+				status = HttpStatus.BAD_REQUEST;
+				message = error.getDefaultMessage();
+				jsonResult = JSONResult.fail(message);
+				return makeResponseEntity(status, jsonResult);
+			}
+		}
+		
 		boolean emailOverlapCheckResult = userService.join(userVo);
-
-		return JSONResult.success(emailOverlapCheckResult);
+		if(!emailOverlapCheckResult) {
+			status = HttpStatus.BAD_REQUEST;
+			message = "회원가입에 실패하였습니다.";
+			jsonResult = JSONResult.fail(message);
+		}
+		
+		return makeResponseEntity(status, jsonResult);
 	}
-
+	
+	
 	@ApiOperation(value = "로그인")
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<JSONResult> login(@RequestBody UserVo userVo) {
 
-		// 파라미터에 @Valid를 명시해주지 않고 유효성검사를 동적으로 생성해줘서 적용한다.
 		Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
-
-		// UserVo의 email 필드에 선언된 validation만 적용한다.
+		
 		Set<ConstraintViolation<UserVo>> validatorResults = validator.validateProperty(userVo, "id");
-
-		if (validatorResults.isEmpty() == false) {
-			String message = messageSource.getMessage("Email.userVo.email", null, LocaleContextHolder.getLocale());
-			JSONResult result = JSONResult.fail(message);
-
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+		
+		HttpStatus status = HttpStatus.OK;
+		String message = null;
+		JSONResult jsonResult = null;
+		
+		if(validatorResults.isEmpty() == false) {
+			for(ConstraintViolation<UserVo> validatorResult : validatorResults ) {
+				message = validatorResult.getMessage();
+				status = HttpStatus.BAD_REQUEST;
+				jsonResult = JSONResult.fail(message);
+				return makeResponseEntity(status, jsonResult);
+			}
 		}
 
 		UserVo loginUserVo = userService.login(userVo);
-
-		return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success("loginSuccess"));
+		
+		if(loginUserVo == null) {
+			message = "아이디와 비밀번호를 확인하세요.";
+			status = HttpStatus.BAD_REQUEST;
+			jsonResult = JSONResult.fail(message);
+		}else {
+			JSONResult.success(loginUserVo);
+		}
+		
+		return makeResponseEntity(status, jsonResult);
 
 	}
 	
