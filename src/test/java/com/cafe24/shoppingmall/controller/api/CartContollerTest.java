@@ -59,25 +59,26 @@ public class CartContollerTest {
 	}
 
 	
-	@Ignore
+//	@Ignore
 	@Test
 	public void putCartTest() throws Exception {
 		
 		CartVo cartVo = new CartVo();
-		cartVo.setAmount(2);
-		cartVo.setDisplayedProductNo(13L);
+		cartVo.setAmount(150);
+		cartVo.setDisplayedProductNo(1L);
 		cartVo.setUserId("hgdkk");
 		
 		ResultActions resultActions = mockMvc.perform(
 				post("/api/cart/put")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(new Gson().toJson(cartVo)));
-
-		resultActions.andExpect(status().isBadRequest()).andDo(print())
+		
+		resultActions.andExpect(status().isOk()).andDo(print())
 				.andExpect(jsonPath("$.result", is("success")))
 				.andExpect(jsonPath("$.data", is(true)));
 	}
 	
+	@Ignore
 	@Test
 	public void getCartListTest() throws Exception {
 		

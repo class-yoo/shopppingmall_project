@@ -17,4 +17,6 @@ import com.cafe24.config.web.SwaggerConfig;
 @ComponentScan({"com.cafe24.shoppingmall.controller", "com.cafe24.shoppingmall.exception"})
 @Import({MVCConfig.class, SecurityConfig.class, FileUploadConfig.class, MessageConfig.class, SwaggerConfig.class})
 public class WebConfig extends WebMvcConfigurerAdapter {
+	
+	
 }

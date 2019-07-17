@@ -3,16 +3,12 @@ package com.cafe24.shoppingmall.controller.api;
 import java.util.List;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
 import javax.validation.Validation;
 import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -33,8 +29,8 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping("/api/user")
 public class UserAPIContoller {
 
-	@Autowired
-	private MessageSource messageSource;
+//	@Autowired
+//	private MessageSource messageSource;
 
 	@Autowired
 	private UserService userService;
@@ -75,7 +71,7 @@ public class UserAPIContoller {
 		}
 		return makeResponseEntity(status, jsonResult);
 	}
-
+	
 	
 	@ApiOperation(value = "회원가입")
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
