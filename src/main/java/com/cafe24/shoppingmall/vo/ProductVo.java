@@ -20,6 +20,7 @@ public class ProductVo {
 	private int preferenceScore;
 	private int postPriority;
 	private Long categoryNo;
+	private ProductImage productImage;
 	
 	public Long getNo() {
 		return no;
@@ -172,6 +173,14 @@ public class ProductVo {
 	public void setCategoryNo(Long categoryNo) {
 		this.categoryNo = categoryNo;
 	}
+	
+	public ProductImage getProductImage() {
+		return productImage;
+	}
+
+	public void setProductImage(ProductImage productImage) {
+		this.productImage = productImage;
+	}
 
 	@Override
 	public String toString() {
@@ -181,7 +190,6 @@ public class ProductVo {
 				+ ", home=" + home + ", restockCheck=" + restockCheck + ", purchaseCount=" + purchaseCount
 				+ ", displayCheck=" + displayCheck + ", saleCheck=" + saleCheck + ", hits=" + hits
 				+ ", preferenceScore=" + preferenceScore + ", postPriority=" + postPriority + ", categoryNo="
-				+ categoryNo + "]";
+				+ categoryNo + ", productImage=" + productImage + "]";
 	}
-
 }

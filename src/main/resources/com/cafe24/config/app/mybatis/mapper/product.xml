@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="product">
+	
+	<resultMap type="cart" id="cartMap">
+		<id column="no" property="no"/>
+		<result column="amount" property="amount"/>
+		<result column="userId" property="userId"/>
+		<association column="displayed_product_no" property="displayedProduct" jdbcType="varchar" javaType="DisplayedProductVo"
+		resultMap=""/>
+			
+	</resultMap>
+	
+	<select id="selectUserByUserId" resultType="string" parameterType="string">
+		<![CDATA[
+		select  cast(AES_DECRYPT(id, 'shop') as char) as 'id'
+		from user
+		where id = AES_ENCRYPT(#{id}, 'shop')
+		]]>
+	</select>
+	
+	<insert id="insertCart" parameterType="cart">
+		<![CDATA[
+			insert
+			into cart
+			values(null, #{amount}, AES_ENCRYPT(#{userId}, 'shop'), #{displayedProductNo});
+		]]>
+	</insert>
+
+	<select id="selectCartListByUserId" resultType="cart" parameterType="string">
+		<![CDATA[
+		select no, name, email, gender
+		from user`
+		where email = #{email}
+		]]>
+	</select>
+	
+</mapper>

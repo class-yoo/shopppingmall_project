@@ -11,7 +11,7 @@
 		]]>
 	</select>
 	
-	<insert id="insertUser" parameterType="uservo">
+	<insert id="insertUser" parameterType="user">
 		<![CDATA[
 			insert
 			into user
@@ -21,7 +21,7 @@
 		]]>
 	</insert>
 
-	<select id="getByEmail" resultType="uservo" parameterType="string">
+	<select id="getByEmail" resultType="user" parameterType="string">
 		<![CDATA[
 		select no, name, email, gender
 		from user
@@ -29,7 +29,7 @@
 		]]>
 	</select>
 	
-	<select id="getById" resultType="uservo" parameterType="string">
+	<select id="getById" resultType="user" parameterType="string">
 		<![CDATA[
 		select id, email, name
 		from user
@@ -38,7 +38,7 @@
 		]]>
 	</select>
 	
-	<select id="selectUserByUserIdAndPassword" parameterType="userVo" resultType="uservo">
+	<select id="selectUserByUserIdAndPassword" parameterType="user" resultType="user">
 		<![CDATA[
 		select cast(AES_DECRYPT(id, 'shop') as char) as 'id', cast(AES_DECRYPT(email, 'shop') as char) as 'email',
 		cast(AES_DECRYPT(name, 'shop') as char) as 'name'
@@ -48,7 +48,7 @@
 		]]>
 	</select>
 	
-	<update id="update" parameterType="uservo">
+	<update id="update" parameterType="user">
 		<![CDATA[
 		update user
 			set name = #{name},

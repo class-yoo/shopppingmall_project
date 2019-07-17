@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,6 +34,7 @@ public class CartAPIController {
 		JSONResult jsonResult = JSONResult.success(true);
 		
 		boolean putResult = cartService.put(cartVo);
+		
 		if(putResult) {
 			status = HttpStatus.BAD_REQUEST;
 			message = "장바구니담기가 실패했습니다.";
@@ -44,7 +46,7 @@ public class CartAPIController {
 
 	@ApiOperation(value = "장바구니목록보기")
 	@RequestMapping(value = "/list/{userId}", method = RequestMethod.GET)
-	public JSONResult list(@CookieValue(value = "userId", defaultValue = "-1") String userId) {
+	public JSONResult list(@PathVariable(value="userId") String userId) {
 		
 		List<CartVo> list = cartService.getCartListByUserId(userId);
 		

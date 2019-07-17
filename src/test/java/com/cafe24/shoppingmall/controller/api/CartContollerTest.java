@@ -82,7 +82,7 @@ public class CartContollerTest {
 	public void getCartListTest() throws Exception {
 		
 		ResultActions resultActions = mockMvc.perform(
-				get("/api/cart/list/{userId}", "user1")
+				get("/api/cart/list/{userId}", "hgdkkk")
 				.contentType(MediaType.APPLICATION_JSON));
 
 		resultActions.andExpect(status().isOk()).andDo(print())

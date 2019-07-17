@@ -65,7 +65,7 @@ public class DisplayedProductVo {
 	public void setProductVo(ProductVo productVo) {
 		this.productVo = productVo;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "DisplayedProductVo [no=" + no + ", code=" + code + ", option=" + option + ", amount=" + amount
