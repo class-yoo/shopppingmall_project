@@ -21,6 +21,7 @@ public class UserService {
 	public boolean join(UserVo userVo) {
 
 		int joinResult = userDao.insertUser(userVo);
+		
 
 		return joinResult == 1 ? true : false;
 	}

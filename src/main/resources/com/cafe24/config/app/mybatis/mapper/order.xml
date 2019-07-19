@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="order">
+	
+	<insert id="insertOrder" parameterType="order">
+	
+		<![CDATA[
+			insert
+			into orders
+			values(#{no}, #{orderNo}, #{title}, #{description}, AES_ENCRYPT(#{destination},'shop'), AES_ENCRYPT( #{detailAddress}, 'shop'),
+			#{postalCode}, #{requirement}, AES_ENCRYPT(#{phoneNumber}, 'shop'), AES_ENCRYPT( #{contact}, 'shop'), AES_ENCRYPT(#{email}, 'shop'),
+			sha(#{password}), #{orderStatus}, now(), #{refundBank}, AES_ENCRYPT(#{refundAccount},'shop'), #{totalPrice}, #{deliverStatus},
+			#{deliverNumber}, #{trackingNumber}, #{completeDeliverDate}, #{userId})
+		]]>
+		
+	</insert>
+	
+	<insert id="insertOrderProduct" parameterType="orderProduct">
+		<![CDATA[
+			insert
+			into order_product
+			values(#{orderNo}, #{displayedProductNo}, #{amount}, #{price});
+		]]>
+	</insert>
+	
+	
+</mapper>

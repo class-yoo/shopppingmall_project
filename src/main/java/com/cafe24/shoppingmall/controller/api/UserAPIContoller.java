@@ -26,7 +26,7 @@ import com.cafe24.shoppingmall.vo.UserVo;
 import io.swagger.annotations.ApiOperation;
 
 @RestController("userAPIController")
-@RequestMapping("/api/user")
+@RequestMapping("/user")
 public class UserAPIContoller {
 
 //	@Autowired

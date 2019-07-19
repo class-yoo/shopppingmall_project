@@ -18,7 +18,7 @@ import com.cafe24.shoppingmall.vo.CartVo;
 import io.swagger.annotations.ApiOperation;
 
 @RestController("cartAPIController")
-@RequestMapping("/api/cart")
+@RequestMapping("/cart")
 public class CartAPIController {
 	
 	@Autowired

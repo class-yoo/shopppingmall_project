@@ -19,7 +19,7 @@
 			values(null, #{amount}, AES_ENCRYPT(#{userId}, 'shop'), #{displayedProductNo});
 		]]>
 	</insert>
-
+	
 	<select id="selectCartListByUserId" resultType="cart" parameterType="string">
 		<![CDATA[
 		select no, name, email, gender

@@ -61,19 +61,19 @@ public class UserContollerTest {
 	@Test
 	public void checkOverlapIdTest() throws Exception {
 		ResultActions resultActions = mockMvc
-						.perform(get("/api/user/checkid/{id}", "hgdkk")
+						.perform(get("/user/checkid/{id}", "hgdkk")
 						.contentType(MediaType.APPLICATION_JSON));
 		
 		resultActions.andExpect(status().isOk()).andDo(print())
 		.andExpect(jsonPath("$.result", is("success")));
 	}
 	
-	@Ignore
+//	@Ignore
 	@Test
 	public void joinTest() throws Exception {
 		UserVo userVo = new UserVo();
-		userVo.setId("hhheee");
-		userVo.setName("홍길동");
+		userVo.setId("hhhbbb");
+		userVo.setName("하이홍");
 		userVo.setPassword("1234aaaa@@");
 		userVo.setGender("M");
 		userVo.setIsWithdrawal("Y");
@@ -82,7 +82,7 @@ public class UserContollerTest {
 		userVo.setEmail("hgd888@cafe24.com");
 		
 		ResultActions resultActions = mockMvc
-						.perform(post("/api/user/join")
+						.perform(post("/user/join")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(new Gson().toJson(userVo)));
 
@@ -91,6 +91,7 @@ public class UserContollerTest {
 		.andExpect(jsonPath("$.data", is(true)));
 	}
 	
+	@Ignore
 	@Test
 	public void loginTest() throws Exception {
 		UserVo userVo = new UserVo();
@@ -98,7 +99,7 @@ public class UserContollerTest {
 		userVo.setPassword("1234aaaa@@");
 		
 		ResultActions resultActions = mockMvc
-						.perform(post("/api/user/login")
+						.perform(post("/user/login")
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(new Gson().toJson(userVo)));
 		

@@ -25,7 +25,6 @@ public class MyBatisConfig {
 	@Bean
 	public SqlSessionTemplate sqlSession(SqlSessionFactory sqlSessionFactory) {
 		SqlSessionTemplate sqlSessionTemplate = new SqlSessionTemplate(sqlSessionFactory);
-		sqlSessionTemplate.clearCache();
 		return sqlSessionTemplate;
 	}
 	

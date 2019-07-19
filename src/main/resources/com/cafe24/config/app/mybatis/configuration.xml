@@ -7,10 +7,13 @@
 		<typeAlias type="com.cafe24.shoppingmall.vo.ProductVo" alias="product"/>
 		<typeAlias type="com.cafe24.shoppingmall.vo.DisplayedProductVo" alias="displayedProduct"/>
 		<typeAlias type="com.cafe24.shoppingmall.vo.ProductImage" alias="productImage"/>
+		<typeAlias type="com.cafe24.shoppingmall.vo.OrderVo" alias="order"/>
+		<typeAlias type="com.cafe24.shoppingmall.vo.OrderProductVo" alias="orderProduct"/>
 	</typeAliases>
 	<mappers>
 		 <mapper resource="com/cafe24/config/app/mybatis/mapper/user.xml"/>
 		 <mapper resource="com/cafe24/config/app/mybatis/mapper/cart.xml"/>
+		 <mapper resource="com/cafe24/config/app/mybatis/mapper/order.xml"/>
 		 
 	</mappers>
 </configuration>
