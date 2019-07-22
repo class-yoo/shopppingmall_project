@@ -1,6 +1,9 @@
 package com.cafe24.shoppingmall.controller.api;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,5 +31,16 @@ public class OrderAPIController {
 		
 		return JSONResult.success(orderAddResult);
 	}
+	
+	@ApiOperation(value = "주문목록")
+	@RequestMapping(value="/list/{userId}", method=RequestMethod.GET)
+	public JSONResult add(@PathVariable String userId) {
+		
+		List<OrderVo> orderAddResult = OrderService.getOrderListByUserId(userId);
+		
+		return JSONResult.success(orderAddResult);
+	}
+	
+	
 	
 }

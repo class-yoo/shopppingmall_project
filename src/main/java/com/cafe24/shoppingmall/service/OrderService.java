@@ -1,5 +1,7 @@
 package com.cafe24.shoppingmall.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,15 @@ public class OrderService {
 			return false;
 		}
 		return true;
+	}
+
+	
+	
+	public List<OrderVo> getOrderListByUserId(String userId) {
+		
+		List<OrderVo> orderList = orderDao.selectOrderListByUserId(userId);
+			
+		return orderList;
 	}
 
 }
