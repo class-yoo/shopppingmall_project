@@ -43,34 +43,33 @@ import com.cafe24.shoppingmall.config.AppConfig;
 @ContextConfiguration(classes = { AppConfig.class, WebConfig.class })
 @WebAppConfiguration
 public class OrderContollerTest {
-	
+
 	private MockMvc mockMvc;
 	TestMockSession tms;
-	
+
 	@Autowired
 	private WebApplicationContext webApplicationContext;
-	
+
 	@Autowired
 	private OrderService orderService;
-	
+
 	@Before
 	public void setup() {
-		
+
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 		tms = new TestMockSession();
 	}
-	
+
 	@Ignore
 	@Test
 	public void testDIOrderService() {
 		assertNotNull(orderService);
 	}
 
-	
 	@Ignore
 	@Test
 	public void putOrderTest() throws Exception {
-		
+
 		OrderVo orderVo = new OrderVo();
 		orderVo.setNo(5L);
 		orderVo.setOrderNo("ASD123215");
@@ -93,7 +92,7 @@ public class OrderContollerTest {
 		orderVo.setDeliverNumber("GYTD19434222AE");
 		orderVo.setTrackingNumber("S704549545123");
 		orderVo.setUserId("hgdkkk");
-		
+
 		OrderProductVo orderProductVo = new OrderProductVo();
 		orderProductVo.setAmount(2);
 		orderProductVo.setPrice(50000);
@@ -104,47 +103,41 @@ public class OrderContollerTest {
 		orderProductVo2.setPrice(38000);
 		orderProductVo2.setDisplayedProductNo(2L);
 		orderProductVo2.setOrderNo(orderVo.getNo());
-		
+
 		List<OrderProductVo> orderProductVos = new ArrayList<OrderProductVo>();
-		
-		orderProductVos.add(orderProductVo);	
+
+		orderProductVos.add(orderProductVo);
 		orderProductVos.add(orderProductVo2);
-		orderVo.setOrderProductVos(orderProductVos);
-		
+		orderVo.setOrderProducts(orderProductVos);
+
 		ResultActions resultActions = mockMvc.perform(
-				post("/order/add")
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(new Gson().toJson(orderVo)));
-		
-		resultActions.andExpect(status().isOk()).andDo(print())
-				.andExpect(jsonPath("$.result", is("success")));
+				post("/order/add").contentType(MediaType.APPLICATION_JSON).content(new Gson().toJson(orderVo)));
+
+		resultActions.andExpect(status().isOk()).andDo(print()).andExpect(jsonPath("$.result", is("success")));
 	}
-	
-//	@Ignore
-	@Test
-	public void getOrderListTest() throws Exception {
-		
-		String userId = "hgdkkk";
-		
-		ResultActions resultActions = mockMvc.perform(
-				get("/order/list/{userId}", userId)
-				.contentType(MediaType.APPLICATION_JSON));
-		
-		resultActions.andExpect(status().isOk()).andDo(print())
-				.andExpect(jsonPath("$.result", is("success")));
-	}
-	
+
 	@Ignore
 	@Test
-	public void getOrderDetailTest() throws Exception {
-		
-		Long orderNo = 1L;
-		
-		ResultActions resultActions = mockMvc.perform(
-				post("/order/list/{orderNo}", orderNo)
-				.contentType(MediaType.APPLICATION_JSON));
-		
-		resultActions.andExpect(status().isOk()).andDo(print())
-				.andExpect(jsonPath("$.result", is("success")));
+	public void getOrderListTest() throws Exception {
+
+		String userId = "hgdkkk";
+
+		ResultActions resultActions = mockMvc
+				.perform(get("/order/list/{userId}", userId).contentType(MediaType.APPLICATION_JSON));
+
+		resultActions.andExpect(status().isOk()).andDo(print()).andExpect(jsonPath("$.result", is("success")));
 	}
+
+//	@Ignore
+	@Test
+	public void getOrderDetailTest() throws Exception {
+
+		Long orderNo = 1L;
+
+		ResultActions resultActions = mockMvc
+				.perform(get("/order/{orderNo}", orderNo).contentType(MediaType.APPLICATION_JSON));
+
+		resultActions.andExpect(status().isOk()).andDo(print()).andExpect(jsonPath("$.result", is("success")));
+	}
+
 }

@@ -32,7 +32,7 @@ public class OrderAPIController {
 		return JSONResult.success(orderAddResult);
 	}
 	
-	@ApiOperation(value = "주문목록")
+	@ApiOperation(value = "주문목록보기")
 	@RequestMapping(value="/list/{userId}", method=RequestMethod.GET)
 	public JSONResult add(@PathVariable String userId) {
 		
@@ -42,5 +42,14 @@ public class OrderAPIController {
 	}
 	
 	
+	@ApiOperation(value = "주문상세보기")
+	@RequestMapping(value="/{orderNo}", method=RequestMethod.GET)
+	public JSONResult add(@PathVariable Long orderNo) {
+		
+		OrderVo orderVo = OrderService.getOrderByOrderNo(orderNo);
+		
+		System.out.println(orderVo);
+		return JSONResult.success(orderVo);
+	}
 	
 }

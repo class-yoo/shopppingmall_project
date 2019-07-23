@@ -27,7 +27,7 @@ public class OrderVo {
 	private String completeDeliverDate;
 	private String userId;
 	
-	private List<OrderProductVo> orderProductVos;
+	private List<OrderProductVo> orderProducts;
 
 	public Long getNo() {
 		return no;
@@ -116,7 +116,7 @@ public class OrderVo {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
 	public String getPassword() {
 		return password;
 	}
@@ -197,12 +197,12 @@ public class OrderVo {
 		this.completeDeliverDate = completeDeliverDate;
 	}
 
-	public List<OrderProductVo> getOrderProductVos() {
-		return orderProductVos;
+	public List<OrderProductVo> getOrderProducts() {
+		return orderProducts;
 	}
 
-	public void setOrderProductVos(List<OrderProductVo> orderProductVos) {
-		this.orderProductVos = orderProductVos;
+	public void setOrderProducts(List<OrderProductVo> orderProducts) {
+		this.orderProducts = orderProducts;
 	}
 
 	public String getUserId() {
@@ -221,7 +221,7 @@ public class OrderVo {
 				+ password + ", orderStatus=" + orderStatus + ", orderDate=" + orderDate + ", refundBank=" + refundBank
 				+ ", refundAccount=" + refundAccount + ", totalPrice=" + totalPrice + ", deliverStatus=" + deliverStatus
 				+ ", deliverNumber=" + deliverNumber + ", trackingNumber=" + trackingNumber + ", completeDeliverDate="
-				+ completeDeliverDate + ", userId=" + userId + ", orderProductVos=" + orderProductVos + "]";
+				+ completeDeliverDate + ", userId=" + userId + ", orderProducts=" + orderProducts + "]";
 	}
 
 }

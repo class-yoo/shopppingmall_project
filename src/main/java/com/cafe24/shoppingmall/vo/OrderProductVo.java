@@ -6,6 +6,8 @@ public class OrderProductVo {
 	private Long displayedProductNo;
 	private int amount;
 	private int price;
+	
+	
 	private DisplayedProductVo displayedProductVo;
 	
 	public Long getOrderNo() {
@@ -46,14 +48,6 @@ public class OrderProductVo {
 
 	public void setPrice(int price) {
 		this.price = price;
-	}
-
-	public DisplayedProductVo getDisplayedProducts() {
-		return displayedProductVo;
-	}
-
-	public void setDisplayedProducts(DisplayedProductVo displayedProductVo) {
-		this.displayedProductVo = displayedProductVo;
 	}
 
 	@Override

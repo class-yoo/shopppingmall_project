@@ -32,4 +32,9 @@ public class OrderDao {
 		return sqlSession.selectList("order.selectOrderListByUserId", userId);
 	}
 
+
+	public OrderVo selectOrderByOrderNo(Long orderNo) {
+		return sqlSession.selectOne("order.selectOrderByOrderNo", orderNo);
+	}
+
 }

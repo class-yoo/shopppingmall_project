@@ -45,7 +45,7 @@
     	c.no as 'product_no', c.code as 'product_code', c.consumer_price,
     	d.no as 'image_no', d.image_path
     
-    	from shoppingmall.cart a, shoppingmall.displayed_product b, shoppingmall.product c, shoppingmall.image d
+    	from cart a, displayed_product b, product c, image d
 		
 		where a.displayed_product_no = b.no and
 				b.product_no = c.no and 
