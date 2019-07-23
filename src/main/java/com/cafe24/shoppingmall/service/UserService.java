@@ -15,22 +15,18 @@ public class UserService {
 	public boolean checkOverapId(String id) {
 
 		String userId = userDao.selectUserByUserId(id);
-		return userId == null ? false : true;
+		
+		return null == userId;
 	}
 
 	public boolean join(UserVo userVo) {
-
-		int joinResult = userDao.insertUser(userVo);
 		
-
-		return joinResult == 1 ? true : false;
+		return 1 == userDao.insertUser(userVo);
 	}
 
 	public UserVo login(UserVo userVo) {
 		
-		UserVo loginUserVo = userDao.selectUserByUserIdAndPassword(userVo);
-		
-		return loginUserVo;
+		return userDao.selectUserByUserIdAndPassword(userVo);
 	}
 
 }

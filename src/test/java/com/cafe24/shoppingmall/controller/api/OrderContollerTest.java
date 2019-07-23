@@ -135,9 +135,13 @@ public class OrderContollerTest {
 		Long orderNo = 1L;
 
 		ResultActions resultActions = mockMvc
-				.perform(get("/order/{orderNo}", orderNo).contentType(MediaType.APPLICATION_JSON));
+				.perform(get("/order/{orderNo}", orderNo)
+						.contentType(MediaType.APPLICATION_JSON));
 
-		resultActions.andExpect(status().isOk()).andDo(print()).andExpect(jsonPath("$.result", is("success")));
+		resultActions
+		.andExpect(status().isOk())
+		.andDo(print())
+		.andExpect(jsonPath("$.result", is("success")));
 	}
 
 }

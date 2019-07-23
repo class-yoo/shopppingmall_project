@@ -1,5 +1,7 @@
 package com.cafe24.shoppingmall.vo;
 
+import java.util.List;
+
 public class ProductVo {
 	private Long no;
 	private String code;
@@ -20,8 +22,10 @@ public class ProductVo {
 	private int preferenceScore;
 	private int postPriority;
 	private Long categoryNo;
-	private ProductImage productImage;
 	
+	private List<OptionVo> optionVo;
+	private ProductImage productImage;
+
 	public Long getNo() {
 		return no;
 	}
@@ -173,7 +177,15 @@ public class ProductVo {
 	public void setCategoryNo(Long categoryNo) {
 		this.categoryNo = categoryNo;
 	}
+
+	public List<OptionVo> getOptionVo() {
+		return optionVo;
+	}
 	
+	public void setOptionVo(List<OptionVo> optionVo) {
+		this.optionVo = optionVo;
+	}
+
 	public ProductImage getProductImage() {
 		return productImage;
 	}
@@ -192,4 +204,5 @@ public class ProductVo {
 				+ ", preferenceScore=" + preferenceScore + ", postPriority=" + postPriority + ", categoryNo="
 				+ categoryNo + ", productImage=" + productImage + "]";
 	}
+
 }

@@ -44,7 +44,7 @@
 		b.option as 'displayed_product_option', b.amount as 'displayed_product_amount', b.stock_check,
     	c.no as 'product_no', c.code as 'product_code', c.consumer_price,
     	d.no as 'image_no', d.image_path
-    
+    	
     	from cart a, displayed_product b, product c, image d
 		
 		where a.displayed_product_no = b.no and

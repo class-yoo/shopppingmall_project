@@ -20,7 +20,6 @@ public class OrderService {
 		System.out.println(orderVo);
 		if (1 == orderDao.insertOrder(orderVo)) {
 			for (OrderProductVo orderProductVo : orderVo.getOrderProducts()) {
-				System.out.println(orderProductVo);
 				if (orderDao.insertOrderProduct(orderProductVo) != 1)
 					return false;
 			}
@@ -29,14 +28,10 @@ public class OrderService {
 		}
 		return true;
 	}
-
-	
 	
 	public List<OrderVo> getOrderListByUserId(String userId) {
 		
-		List<OrderVo> orderList = orderDao.selectOrderListByUserId(userId);
-			
-		return orderList;
+		return orderDao.selectOrderListByUserId(userId);
 	}
 
 	public OrderVo getOrderByOrderNo(Long orderNo) {
