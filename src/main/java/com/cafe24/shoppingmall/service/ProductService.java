@@ -1,5 +1,7 @@
 package com.cafe24.shoppingmall.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,24 +13,33 @@ public class ProductService {
 
 	@Autowired
 	private ProductDao productDao;
-	
+
 	public boolean add(ProductVo productVo) {
-		return 1==productDao.insertProduct(productVo);
+		return 1 == productDao.insertProduct(productVo);
 	}
 
 	public ProductVo getProductByProductNo(Long productNo) {
-		
+
 		return productDao.selectProductByProductNo(productNo);
 	}
 
 	public boolean modify(ProductVo productVo) {
-		
-		return 1==productDao.updateProduct(productVo);
+
+		return 1 == productDao.updateProduct(productVo);
 	}
 
 	public boolean remove(Long productNo) {
+
+		return 1 == productDao.deleteProduct(productNo);
+	}
+
+	public Long getProductCount(String keyword, String category) {
+		return productDao.selectProductCount(keyword, category);
+	}
+
+	public List<ProductVo> getSearchProductList(String keyword, String category, int startPageNum, int showBoardNum) {
 		
-		return 1==productDao.deleteProduct(productNo);
+		return productDao.selectSearchProductList(keyword,category,startPageNum, showBoardNum);
 	}
 
 }

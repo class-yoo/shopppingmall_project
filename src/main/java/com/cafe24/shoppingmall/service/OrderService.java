@@ -23,19 +23,19 @@ public class OrderService {
 				if (orderDao.insertOrderProduct(orderProductVo) != 1)
 					return false;
 			}
-		}else {
+		} else {
 			return false;
 		}
 		return true;
 	}
-	
+
 	public List<OrderVo> getOrderListByUserId(String userId) {
-		
+
 		return orderDao.selectOrderListByUserId(userId);
 	}
 
 	public OrderVo getOrderByOrderNo(Long orderNo) {
-		
+
 		return orderDao.selectOrderByOrderNo(orderNo);
 	}
 

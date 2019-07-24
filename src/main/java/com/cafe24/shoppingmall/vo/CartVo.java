@@ -7,7 +7,7 @@ public class CartVo {
 	private String userId;
 	private Long displayedProductNo;
 	private DisplayedProductVo displayedProduct;
-
+	
 	public Long getNo() {
 		return no;
 	}
@@ -31,7 +31,7 @@ public class CartVo {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	
+
 	public Long getDisplayedProductNo() {
 		return displayedProductNo;
 	}

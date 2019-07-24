@@ -3,37 +3,81 @@
 
 <mapper namespace="product">
 	
-	<resultMap type="cart" id="cartMap">
+	<resultMap type="product" id="productMap">
 		<id column="no" property="no"/>
-		<result column="amount" property="amount"/>
-		<result column="userId" property="userId"/>
-		<association column="displayed_product_no" property="displayedProduct" jdbcType="varchar" javaType="DisplayedProductVo"
-		resultMap=""/>
-			
+		<result column="code" property="code"/>
+		<result column="name" property="name"/>
+		<result column="material" property="material"/>
+		<result column="description" property="description"/>
+		<result column="detail_description" property="detailDescription"/>
+		<result column="supply_price" property="supplyPrice"/>
+		<result column="consumer_price" property="consumerPrice"/>
+		<result column="supplier" property="supplier"/>
+		<result column="home" property="home"/>
+		<result column="manufacture_date" property="manufactureDate"/>
+		<result column="restock_check" property="restockCheck"/>
+		<result column="purchase_count" property="purchaseCount"/>
+		<result column="display_check" property="displayCheck"/>
+		<result column="sale_check" property="saleCheck"/>
+		<result column="hits" property="hits"/>
+		<result column="preference_score" property="preferenceScore"/>
+		<result column="post_priority" property="postPriority"/>
+		<result column="category_no" property="categoryNo"/>
+		
+		<collection column="no" property="displayedProducts" select="selectDisplayedProductsByProductNo"/>
+		<collection column="no" property="options" select="selectOptionsByProductNo"/>
 	</resultMap>
 	
-	<select id="selectUserByUserId" resultType="string" parameterType="string">
+	<insert id="insertProduct" parameterType="product">
 		<![CDATA[
-		select  cast(AES_DECRYPT(id, 'shop') as char) as 'id'
-		from user
-		where id = AES_ENCRYPT(#{id}, 'shop')
+			insert
+			into product
+			values(null, #{code}, #{name}, #{material}, #{description}, #{detailDescription}, #{supplyPrice}, #{consumerPrice},
+			#{manufacturer}, #{supplier}, #{home}, #{manufactureDate}, #{restockCheck},#{purchaseCount}, #{displayCheck}, #{saleCheck}, #{hits}, #{preferenceScore},
+			#{postPriority}, #{categoryNo});
+		]]>
+	</insert>
+	
+	
+	<select id="selectProductByProductNo" resultMap="productMap" parameterType="long">
+		<![CDATA[
+		select no, code, name, material, description, detail_description, supply_price, consumer_price,
+		supplier, home, manufacture_date, restock_check, purchase_count, display_check, sale_check, hits,
+		preference_score, post_priority, category_no
+		from product
+		where no = #{productNo}
+		]]>
+	</select>
+
+
+	<select id="selectDisplayedProductsByProductNo" resultType="option" parameterType="long">
+		<![CDATA[
+		select no, code, name, option, main_image_path as 'mainImagePath', amount,  stock_check as 'stockCheck',
+		additional_fee as 'additionalFee', price, product_no as 'productNo'
+		from displayed_product
+		where product_no = #{productNo}
 		]]>
 	</select>
 	
-	<insert id="insertCart" parameterType="cart">
+	<select id="selectOptionsByProductNo" resultType="option" parameterType="long">
 		<![CDATA[
-			insert
-			into cart
-			values(null, #{amount}, AES_ENCRYPT(#{userId}, 'shop'), #{displayedProductNo});
-		]]>
-	</insert>
-
-	<select id="selectCartListByUserId" resultType="cart" parameterType="string">
-		<![CDATA[
-		select no, name, email, gender
-		from user`
-		where email = #{email}
+		select no, option_code as 'code', option_key as 'optionKey', option_values as 'optionValues', product_no as 'productNo'
+		from product_option
+		where product_no = #{productNo}
 		]]>
 	</select>
+		
+		<!-- <select id="" resultType="product" parameterType="map">
+	<![CDATA[
+		select 
+		from 
+		where a.user_no = b.no 
+		and (a.title like '%${keyword}%'
+		or a.contents like '%${keyword}%')
+		order by a.group_no desc, a.order_no asc
+		limit  ${showBoardNum} offset ${startPageNum}
+		
+	]]>
+	</select> -->
 	
 </mapper>

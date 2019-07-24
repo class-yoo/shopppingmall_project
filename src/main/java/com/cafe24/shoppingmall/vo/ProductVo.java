@@ -14,6 +14,7 @@ public class ProductVo {
 	private String manufacturer;
 	private String supplier;
 	private String home;
+	private String manufactureDate;
 	private String restockCheck;
 	private Long purchaseCount;
 	private String displayCheck;
@@ -22,8 +23,9 @@ public class ProductVo {
 	private int preferenceScore;
 	private int postPriority;
 	private Long categoryNo;
-	
-	private List<OptionVo> optionVo;
+
+	private List<DisplayedProductVo> displayedProducts;
+	private List<OptionVo> options;
 	private ProductImage productImage;
 
 	public Long getNo() {
@@ -114,6 +116,14 @@ public class ProductVo {
 		this.home = home;
 	}
 
+	public String getManufactureDate() {
+		return manufactureDate;
+	}
+
+	public void setManufactureDate(String manufactureDate) {
+		this.manufactureDate = manufactureDate;
+	}
+
 	public String getRestockCheck() {
 		return restockCheck;
 	}
@@ -178,12 +188,20 @@ public class ProductVo {
 		this.categoryNo = categoryNo;
 	}
 
-	public List<OptionVo> getOptionVo() {
-		return optionVo;
+	public List<DisplayedProductVo> getDisplayedProducts() {
+		return displayedProducts;
 	}
-	
-	public void setOptionVo(List<OptionVo> optionVo) {
-		this.optionVo = optionVo;
+
+	public void setDisplayedProducts(List<DisplayedProductVo> displayedProducts) {
+		this.displayedProducts = displayedProducts;
+	}
+
+	public List<OptionVo> getOptions() {
+		return options;
+	}
+
+	public void setOptions(List<OptionVo> options) {
+		this.options = options;
 	}
 
 	public ProductImage getProductImage() {

@@ -9,11 +9,13 @@
 		<typeAlias type="com.cafe24.shoppingmall.vo.ProductImage" alias="productImage"/>
 		<typeAlias type="com.cafe24.shoppingmall.vo.OrderVo" alias="order"/>
 		<typeAlias type="com.cafe24.shoppingmall.vo.OrderProductVo" alias="orderProduct"/>
+		<typeAlias type="com.cafe24.shoppingmall.vo.OptionVo" alias="option"/>
 	</typeAliases>
 	<mappers>
 		 <mapper resource="com/cafe24/config/app/mybatis/mapper/user.xml"/>
 		 <mapper resource="com/cafe24/config/app/mybatis/mapper/cart.xml"/>
 		 <mapper resource="com/cafe24/config/app/mybatis/mapper/order.xml"/>
+		 <mapper resource="com/cafe24/config/app/mybatis/mapper/product.xml"/>
 		 
 	</mappers>
 </configuration>
