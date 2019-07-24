@@ -24,4 +24,8 @@
 | 주문하기 API(회원, 비회원)          | order/add             | 7.18     | 2h(2시간)           | 7.19     | 2h(2시간)          | https://github.com/Yujaehyeong/shoppingmall_1/wiki/3-Week-%EC%A3%BC%EB%AC%B8 |
 | 주문목록보기 API(회원, 비회원)      | order/list/{userId}   | 7.22     | 1h 30분(1시간 30분) | 7.22     | 1h(1시간)          | https://github.com/Yujaehyeong/shoppingmall_1/wiki/3-Week-%EC%A3%BC%EB%AC%B8 |
 | 주문상세보기 API(회원, 비회원)      | order/{orderNo}       | 7.22     | 2h(2시간)           | 7.23     | 2h(2시간)          | https://github.com/Yujaehyeong/shoppingmall_1/wiki/3-Week-%EC%A3%BC%EB%AC%B8 |
+| 상품정보보기 API                    | product/{productNo}   | 7.24     | 3h(2시간)           | 7.24     | 2h(2시간)          |             https://github.com/Yujaehyeong/shoppingmall_1/wiki/4-Week-%EC%83%81%ED%92%88%EA%B4%80%EB%A6%AC                                                 |
+| 상품추가하기API                     | product/{productNo}   | 7.24     | 2h(2시간)           | 7.24     |                    |                                                              |
+| 상품수정하기API                     | product/{productNo}   | 7.24     | 2h(2시간)           |          |                    |                                                              |
+| 상품삭제하기API                     | product/{productNo}   | 7.24     | 2h(2시간)           |          |                    |                                                              |
 
