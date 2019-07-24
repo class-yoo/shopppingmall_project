@@ -8,6 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cafe24.shoppingmall.vo.DisplayedProductVo;
+import com.cafe24.shoppingmall.vo.OptionVo;
+import com.cafe24.shoppingmall.vo.ProductImage;
 import com.cafe24.shoppingmall.vo.ProductVo;
 
 @Repository
@@ -16,9 +19,9 @@ public class ProductDao {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public int insertProduct(ProductVo productVo) {
-
-		return sqlSession.insert("product.insertProduct", productVo);
+	public Long insertProduct(ProductVo productVo) {
+		
+		return sqlSession.selectOne("product.insertProduct", productVo);
 	}
 
 	public ProductVo selectProductByProductNo(Long productNo) {
@@ -50,8 +53,19 @@ public class ProductDao {
 		map.put("category", category);
 		map.put("startPageNum", startPageNum);
 		map.put("showBoardNum", showBoardNum);
-		
 		return sqlSession.selectList("product.selectSearchProductList", map);
+	}
+
+	public int insertDisplayedProduct(DisplayedProductVo displayedProductVo) {
+		return sqlSession.insert("product.insertDisplayedProduct", displayedProductVo);
+	}
+
+	public int insertOption(OptionVo optionVo) {
+		return sqlSession.insert("product.insertOption", optionVo);
+	}
+
+	public int insertImage(ProductImage image) {
+		return sqlSession.insert("product.insertImage", image);
 	}
 
 }

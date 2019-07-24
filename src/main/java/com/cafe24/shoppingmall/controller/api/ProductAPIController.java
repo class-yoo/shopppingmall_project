@@ -43,14 +43,14 @@ public class ProductAPIController {
 	}
 	
 	@ApiOperation(value = "상품수정하기")
-	@RequestMapping(value="/modify", method=RequestMethod.POST)
+	@RequestMapping(value="/modify", method=RequestMethod.PUT)
 	public JSONResult modify(@RequestBody ProductVo productVo) {
 		boolean modifyResult = productService.modify(productVo);
 		return JSONResult.success(modifyResult);
 	}
 	
 	@ApiOperation(value = "상품삭제하기")
-	@RequestMapping(value="/remove/{productNo}", method=RequestMethod.GET)
+	@RequestMapping(value="/remove/{productNo}", method=RequestMethod.DELETE)
 	public JSONResult remove(@PathVariable Long productNo) {
 		
 		boolean removeResult = productService.remove(productNo);

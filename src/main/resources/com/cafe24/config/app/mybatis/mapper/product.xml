@@ -12,6 +12,7 @@
 		<result column="detail_description" property="detailDescription"/>
 		<result column="supply_price" property="supplyPrice"/>
 		<result column="consumer_price" property="consumerPrice"/>
+		<result column="manufacturer" property="manufacturer"/>
 		<result column="supplier" property="supplier"/>
 		<result column="home" property="home"/>
 		<result column="manufacture_date" property="manufactureDate"/>
@@ -23,34 +24,59 @@
 		<result column="preference_score" property="preferenceScore"/>
 		<result column="post_priority" property="postPriority"/>
 		<result column="category_no" property="categoryNo"/>
-		
 		<collection column="no" property="displayedProducts" select="selectDisplayedProductsByProductNo"/>
 		<collection column="no" property="options" select="selectOptionsByProductNo"/>
+		<collection column="no" property="productImages" select="selectImagesByProductNo"/>
 	</resultMap>
 	
 	<insert id="insertProduct" parameterType="product">
 		<![CDATA[
 			insert
 			into product
-			values(null, #{code}, #{name}, #{material}, #{description}, #{detailDescription}, #{supplyPrice}, #{consumerPrice},
+			values(12, #{code}, #{name}, #{material}, #{description}, #{detailDescription}, #{supplyPrice}, #{consumerPrice},
 			#{manufacturer}, #{supplier}, #{home}, #{manufactureDate}, #{restockCheck},#{purchaseCount}, #{displayCheck}, #{saleCheck}, #{hits}, #{preferenceScore},
 			#{postPriority}, #{categoryNo});
+		]]>
+	</insert>
+	
+	<insert id="insertDisplayedProduct" parameterType="displayedProduct">
+		<![CDATA[
+			insert
+			into displayed_product
+			values(null , #{code}, #{name}, #{code}, #{option}, #{mainImagePath}, #{amount}, #{stockCheck}
+			#{additionalFee}, #{price}, #{ProductNo});
+		]]>
+	</insert>
+	
+	<insert id="insertOption" parameterType="option">
+		<![CDATA[
+			insert
+			into displayed_product
+			values(null , #{code}, #{optionKey}, #{optionValues}, #{productNo})
+		]]>
+	</insert>
+	
+	<insert id="insertImage" parameterType="productImage">
+		<![CDATA[
+			insert
+			into image
+			values(null , #{imagePath}, #{mainImageCheck}, #{productNo})
 		]]>
 	</insert>
 	
 	
 	<select id="selectProductByProductNo" resultMap="productMap" parameterType="long">
 		<![CDATA[
-		select no, code, name, material, description, detail_description, supply_price, consumer_price,
-		supplier, home, manufacture_date, restock_check, purchase_count, display_check, sale_check, hits,
-		preference_score, post_priority, category_no
+		select no, code, name, material, description, detail_description, supply_price, consumer_price, 
+		manufacturer, supplier, home, manufacture_date, restock_check, purchase_count, display_check, sale_check, 
+		hits, preference_score, post_priority, category_no
 		from product
 		where no = #{productNo}
 		]]>
 	</select>
+	
 
-
-	<select id="selectDisplayedProductsByProductNo" resultType="option" parameterType="long">
+	<select id="selectDisplayedProductsByProductNo" resultType="displayedProduct" parameterType="long">
 		<![CDATA[
 		select no, code, name, option, main_image_path as 'mainImagePath', amount,  stock_check as 'stockCheck',
 		additional_fee as 'additionalFee', price, product_no as 'productNo'
@@ -63,6 +89,14 @@
 		<![CDATA[
 		select no, option_code as 'code', option_key as 'optionKey', option_values as 'optionValues', product_no as 'productNo'
 		from product_option
+		where product_no = #{productNo}
+		]]>
+	</select>
+	
+	<select id="selectImagesByProductNo" resultType="productImage" parameterType="long">
+		<![CDATA[
+		select no, image_path as 'imagePath', main_image_check as 'mainImageCheck', product_no as 'productNo'
+		from image
 		where product_no = #{productNo}
 		]]>
 	</select>

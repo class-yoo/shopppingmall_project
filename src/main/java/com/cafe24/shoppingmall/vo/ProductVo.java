@@ -26,7 +26,7 @@ public class ProductVo {
 
 	private List<DisplayedProductVo> displayedProducts;
 	private List<OptionVo> options;
-	private ProductImage productImage;
+	private List<ProductImage> productImages;
 
 	public Long getNo() {
 		return no;
@@ -167,7 +167,7 @@ public class ProductVo {
 	public int getPreferenceScore() {
 		return preferenceScore;
 	}
-
+	
 	public void setPreferenceScore(int preferenceScore) {
 		this.preferenceScore = preferenceScore;
 	}
@@ -204,12 +204,12 @@ public class ProductVo {
 		this.options = options;
 	}
 
-	public ProductImage getProductImage() {
-		return productImage;
+	public List<ProductImage> getProductImages() {
+		return productImages;
 	}
 
-	public void setProductImage(ProductImage productImage) {
-		this.productImage = productImage;
+	public void setProductImages(List<ProductImage> productImages) {
+		this.productImages = productImages;
 	}
 
 	@Override
@@ -217,10 +217,22 @@ public class ProductVo {
 		return "ProductVo [no=" + no + ", code=" + code + ", name=" + name + ", material=" + material + ", description="
 				+ description + ", detailDescription=" + detailDescription + ", supplyPrice=" + supplyPrice
 				+ ", consumerPrice=" + consumerPrice + ", manufacturer=" + manufacturer + ", supplier=" + supplier
-				+ ", home=" + home + ", restockCheck=" + restockCheck + ", purchaseCount=" + purchaseCount
-				+ ", displayCheck=" + displayCheck + ", saleCheck=" + saleCheck + ", hits=" + hits
-				+ ", preferenceScore=" + preferenceScore + ", postPriority=" + postPriority + ", categoryNo="
-				+ categoryNo + ", productImage=" + productImage + "]";
+				+ ", home=" + home + ", manufactureDate=" + manufactureDate + ", restockCheck=" + restockCheck
+				+ ", purchaseCount=" + purchaseCount + ", displayCheck=" + displayCheck + ", saleCheck=" + saleCheck
+				+ ", hits=" + hits + ", preferenceScore=" + preferenceScore + ", postPriority=" + postPriority
+				+ ", categoryNo=" + categoryNo + ", displayedProducts=" + displayedProducts + ", options=" + options
+				+ ", productImages=" + productImages + ", getNo()=" + getNo() + ", getCode()=" + getCode()
+				+ ", getName()=" + getName() + ", getMaterial()=" + getMaterial() + ", getDescription()="
+				+ getDescription() + ", getDetailDescription()=" + getDetailDescription() + ", getSupplyPrice()="
+				+ getSupplyPrice() + ", getConsumerPrice()=" + getConsumerPrice() + ", getManufacturer()="
+				+ getManufacturer() + ", getSupplier()=" + getSupplier() + ", getHome()=" + getHome()
+				+ ", getManufactureDate()=" + getManufactureDate() + ", getRestockCheck()=" + getRestockCheck()
+				+ ", getPurchaseCount()=" + getPurchaseCount() + ", getDisplayCheck()=" + getDisplayCheck()
+				+ ", getSaleCheck()=" + getSaleCheck() + ", getHits()=" + getHits() + ", getPreferenceScore()="
+				+ getPreferenceScore() + ", getPostPriority()=" + getPostPriority() + ", getCategoryNo()="
+				+ getCategoryNo() + ", getDisplayedProducts()=" + getDisplayedProducts() + ", getOptions()="
+				+ getOptions() + ", getProductImages()=" + getProductImages() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
 
 }
