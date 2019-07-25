@@ -28,5 +28,5 @@
 | 상품추가하기API                     | product/add                                                  | 7.24     | 2h(2시간)           | 7.24 - 7.25 | 2h(2시간)          | [보기](https://github.com/Yujaehyeong/shoppingmall_1/wiki/4-Week-%EC%83%81%ED%92%88%EA%B4%80%EB%A6%AC) |
 | 상품삭제하기API                     | product/remove/{productNo}                                   | 7.25     | 2h(2시간)           | 7.25        | 30M(30분)          | [보기](https://github.com/Yujaehyeong/shoppingmall_1/wiki/4-Week-%EC%83%81%ED%92%88%EA%B4%80%EB%A6%AC) |
 | 상품수정하기API                     | product/modify                                               | 7.25     | 2h(2시간)           |             |                    |                                                              |
-| 상품목록보기API                     | product/list/{keyword}/{category}/{curpageNum}/{showBoardNum} | 7.25     | 2h 30M(2시간 30분)  |             |                    |                                                              |
+| 상품목록보기API                     | product/list/{keyword}/{category}/{curpageNum}/{showProductNum} | 7.25     | 2h 30M(2시간 30분)  |             |                    |                                                              |
 
