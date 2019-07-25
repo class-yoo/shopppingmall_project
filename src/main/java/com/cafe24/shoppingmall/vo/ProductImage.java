@@ -7,6 +7,16 @@ public class ProductImage {
 	private String mainImageCheck;
 	private Long productNo;
 	
+	public ProductImage() {
+	}
+	
+	public ProductImage(Long no, String imagePath, String mainImageCheck, Long productNo) {
+		this.no = no;
+		this.imagePath = imagePath;
+		this.mainImageCheck =mainImageCheck;
+		this.productNo = productNo;
+	}
+	
 	public Long getNo() {
 		return no;
 	}

@@ -14,6 +14,22 @@ public class DisplayedProductVo {
 	private Long ProductNo;
 	
 	private ProductVo productVo;
+	public DisplayedProductVo() {
+	}
+	
+	public DisplayedProductVo(Long no, String code, String name, String option, String mainImagePath, int amount
+			, String stockCheck, int additionalFee, int price, Long productNo) {
+		this.no = no;
+		this.code = code;
+		this.name = name;
+		this.option =option;
+		this.mainImagePath = mainImagePath;
+		this.amount = amount;
+		this.stockCheck = stockCheck;
+		this.additionalFee= additionalFee;
+		this.price = price;
+		this.ProductNo= productNo;
+	}
 	
 	public Long getNo() {
 		return no;

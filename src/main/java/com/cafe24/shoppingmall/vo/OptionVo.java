@@ -7,7 +7,20 @@ public class OptionVo {
 	private String optionKey;
 	private String optionValues;
 	private Long productNo;
+
+	public OptionVo() {
+	}
 	
+	public OptionVo(Long no, String code, String optionKey, String optionValues, Long productNo) {
+
+		this.no = no;
+		this.code = code;
+		this.optionKey = optionKey;
+		this.optionValues = optionValues;
+		this.productNo = productNo;
+		
+	}
+
 	public Long getNo() {
 		return no;
 	}

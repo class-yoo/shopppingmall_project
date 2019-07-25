@@ -19,9 +19,9 @@ public class ProductDao {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public Long insertProduct(ProductVo productVo) {
+	public int insertProduct(ProductVo productVo) {
 		
-		return sqlSession.selectOne("product.insertProduct", productVo);
+		return sqlSession.insert("product.insertProduct", productVo);
 	}
 
 	public ProductVo selectProductByProductNo(Long productNo) {

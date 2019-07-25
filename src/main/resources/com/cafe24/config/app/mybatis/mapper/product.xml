@@ -33,25 +33,28 @@
 		<![CDATA[
 			insert
 			into product
-			values(12, #{code}, #{name}, #{material}, #{description}, #{detailDescription}, #{supplyPrice}, #{consumerPrice},
+			values(null, #{code}, #{name}, #{material}, #{description}, #{detailDescription}, #{supplyPrice}, #{consumerPrice},
 			#{manufacturer}, #{supplier}, #{home}, #{manufactureDate}, #{restockCheck},#{purchaseCount}, #{displayCheck}, #{saleCheck}, #{hits}, #{preferenceScore},
 			#{postPriority}, #{categoryNo});
 		]]>
+		<selectKey  keyProperty="no" resultType="long" order="AFTER">
+                SELECT LAST_INSERT_ID()
+        </selectKey>
 	</insert>
 	
 	<insert id="insertDisplayedProduct" parameterType="displayedProduct">
 		<![CDATA[
 			insert
 			into displayed_product
-			values(null , #{code}, #{name}, #{code}, #{option}, #{mainImagePath}, #{amount}, #{stockCheck}
-			#{additionalFee}, #{price}, #{ProductNo});
+			values(null , #{code}, #{name}, #{option}, #{mainImagePath}, #{amount}, #{stockCheck},
+			#{additionalFee}, #{price}, #{productNo});
 		]]>
 	</insert>
 	
 	<insert id="insertOption" parameterType="option">
 		<![CDATA[
 			insert
-			into displayed_product
+			into product_option
 			values(null , #{code}, #{optionKey}, #{optionValues}, #{productNo})
 		]]>
 	</insert>

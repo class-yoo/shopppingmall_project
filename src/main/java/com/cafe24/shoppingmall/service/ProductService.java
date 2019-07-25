@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cafe24.shoppingmall.repository.ProductDao;
 import com.cafe24.shoppingmall.vo.DisplayedProductVo;
@@ -12,31 +13,34 @@ import com.cafe24.shoppingmall.vo.ProductImage;
 import com.cafe24.shoppingmall.vo.ProductVo;
 
 @Service
+@Transactional
 public class ProductService {
 
 	@Autowired
 	private ProductDao productDao;
-
+	
 	public boolean add(ProductVo productVo) {
 		
-		Long recentlyProductNo = productDao.insertProduct(productVo);
+		int productInsertResult = productDao.insertProduct(productVo);
+		
+		if(productInsertResult != 1) return false;
 		
 		for (DisplayedProductVo displayedProductVo : productVo.getDisplayedProducts()) {
-			displayedProductVo.setProductNo(recentlyProductNo);
+			displayedProductVo.setProductNo(productVo.getNo());
 			int insertResult = productDao.insertDisplayedProduct(displayedProductVo);
 			
 			if(1!=insertResult) return false;
 		}
 		
 		for (OptionVo optionVo : productVo.getOptions()) {
-			optionVo.setProductNo(recentlyProductNo);
+			optionVo.setProductNo(productVo.getNo());
 			int insertResult = productDao.insertOption(optionVo);
 			
 			if(1!=insertResult) return false;
 		}
 		
 		for (ProductImage image : productVo.getProductImages()) {
-			image.setProductNo(recentlyProductNo);
+			image.setProductNo(productVo.getNo());
 			int insertResult = productDao.insertImage(image);
 			
 			if(1!=insertResult) return false;
