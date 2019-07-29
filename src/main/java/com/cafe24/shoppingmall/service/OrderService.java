@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cafe24.shoppingmall.repository.OrderDao;
 import com.cafe24.shoppingmall.vo.OrderProductVo;
 import com.cafe24.shoppingmall.vo.OrderVo;
 
 @Service
+@Transactional
 public class OrderService {
 
 	@Autowired

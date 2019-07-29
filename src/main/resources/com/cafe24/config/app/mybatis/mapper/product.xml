@@ -7,6 +7,7 @@
 		<id column="no" property="no"/>
 		<result column="code" property="code"/>
 		<result column="name" property="name"/>
+		<result column="complete_category" property="completeCategory"/>
 		<result column="material" property="material"/>
 		<result column="description" property="description"/>
 		<result column="detail_description" property="detailDescription"/>
@@ -23,6 +24,7 @@
 		<result column="hits" property="hits"/>
 		<result column="preference_score" property="preferenceScore"/>
 		<result column="post_priority" property="postPriority"/>
+		<result column="reg_date" property="regDate"/>
 		<result column="category_no" property="categoryNo"/>
 		<collection column="no" property="displayedProducts" select="selectDisplayedProductsByProductNo"/>
 		<collection column="no" property="options" select="selectOptionsByProductNo"/>
@@ -33,7 +35,7 @@
 		<![CDATA[
 			insert
 			into product
-			values(null, #{code}, #{name}, #{material}, #{description}, #{detailDescription}, #{supplyPrice}, #{consumerPrice},
+			values(null, #{code}, #{name}, #{completeCategory}, #{material}, #{description}, #{detailDescription}, #{supplyPrice}, #{consumerPrice},
 			#{manufacturer}, #{supplier}, #{home}, #{manufactureDate}, #{restockCheck},#{purchaseCount}, #{displayCheck}, #{saleCheck}, #{hits}, #{preferenceScore},
 			#{postPriority}, #{categoryNo});
 		]]>
@@ -70,15 +72,14 @@
 	
 	<select id="selectProductByProductNo" resultMap="productMap" parameterType="long">
 		<![CDATA[
-		select no, code, name, material, description, detail_description, supply_price, consumer_price, 
-		manufacturer, supplier, home, manufacture_date, restock_check, purchase_count, display_check, sale_check, 
-		hits, preference_score, post_priority, category_no
-		from product
-		where no = #{productNo}
+			select no, code, name, complete_category, material, description, detail_description, supply_price,
+			consumer_price, manufacturer, supplier, home, manufacture_date, restock_check, purchase_count, display_check,
+			sale_check, hits, preference_score, post_priority, reg_date, category_no
+			from product
+			where no = #{productNo}
 		]]>
 	</select>
 	
-
 	<select id="selectDisplayedProductsByProductNo" resultType="displayedProduct" parameterType="long">
 		<![CDATA[
 		select no, code, name, option, main_image_path as 'mainImagePath', amount,  stock_check as 'stockCheck',
@@ -103,18 +104,96 @@
 		where product_no = #{productNo}
 		]]>
 	</select>
-		
-		<!-- <select id="" resultType="product" parameterType="map">
-	<![CDATA[
-		select 
-		from 
-		where a.user_no = b.no 
-		and (a.title like '%${keyword}%'
-		or a.contents like '%${keyword}%')
-		order by a.group_no desc, a.order_no asc
-		limit  ${showBoardNum} offset ${startPageNum}
-		
-	]]>
-	</select> -->
+	
+	<!-- 최하위 CategoryNo와 keyword를 포함한 튜플을 찾는다. -->	
+	<select id="selectProductCount" resultType="long" parameterType="map">
+		<![CDATA[
+		select count(no)
+		from product
+		]]>
+		<choose>
+			<when test="categoryNo == 0">
+        		where name like '%${keyword}%'
+        	</when>
+        	<otherwise>
+        		where category_no = #{categoryNo} and name like '%${keyword}%'
+        	</otherwise>
+        </choose>
+	</select>
+	
+	<select id="selectSearchProductList" resultType="product" parameterType="map">
+		<![CDATA[
+		select a.no, a.name, a.consumer_price as 'consumerPrice', a.display_check as 'displayCheck',
+		a.sale_check as 'saleCheck', a.complete_category as 'completeCategory', a.reg_date as 'regDate',
+		b.image_path as 'mainImage'
+		from product a, image b
+		]]>
+		where a.no = b.product_no 
+		and b.main_image_check = 'Y'
+		<choose>
+			<when test="categoryNo == 0">
+        		and a.name like '%${keyword}%'
+        	</when>
+        	<otherwise>
+        		and a.category_no = #{categoryNo} and a.name like '%${keyword}%'
+        	</otherwise>
+        </choose>
+		order by a.no desc
+		limit #{showProductNum} offset #{startPageNum}
+	</select>
+	
+	<update id="updateProduct" parameterType="product">
+		update product
+		set name=#{name}, material=#{material}, description=#{description},
+		detail_description = #{detailDescription}, supply_price = #{supplyPrice}, consumer_price =#{consumerPrice}, 
+		manufacturer=#{manufacturer}, supplier=#{supplier}, home=#{home}, manufacture_date =#{manufactureDate},
+		restock_check =#{restockCheck} , purchase_count =#{purchaseCount}, display_check =#{displayCheck},
+		sale_check =#{saleCheck}, hits =#{hits}, preference_score =#{preferenceScore}, post_priority =#{postPriority},
+		category_no =#{categoryNo}
+		where no = #{no}
+	</update>
+	
+	
+	<delete id="deleteProduct" parameterType="long">
+		delete 
+		from product
+		where no = #{no}
+	</delete>
+	
+	<delete id="deleteOptionByProductNo" parameterType="long">
+		delete 
+		from product_option
+		where product_no = #{productNo}
+	</delete>
+	
+	<delete id="deleteDisplayedProductByProductNo" parameterType="long">
+		delete 
+		from displayed_product
+		where product_no = #{productNo}
+	</delete>
+	
+	<delete id="deleteImageByProductNo" parameterType="long">
+		delete 
+		from image
+		where product_no = #{productNo}
+	</delete>
+	
+	<delete id="deleteImageByImageNo" parameterType="long">
+		delete 
+		from image
+		where no = #{imageNo}
+	</delete>
+	
+	<delete id="deleteOptionByOptionNo" parameterType="long">
+		delete 
+		from product_option
+		where no = #{optionNo}
+	</delete>
+	
+	<delete id="deleteDisplayedProductByOption" parameterType="long">
+		delete 
+		from displayed_product
+		where product_no = #{productNo] and option like concat('%',#{optionValue},'%')
+	</delete>
 	
 </mapper>

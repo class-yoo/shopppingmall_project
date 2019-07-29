@@ -6,6 +6,7 @@ public class ProductVo {
 	private Long no;
 	private String code;
 	private String name;
+	private String completeCategory;
 	private String material;
 	private String description;
 	private String detailDescription;
@@ -22,7 +23,9 @@ public class ProductVo {
 	private Long hits;
 	private int preferenceScore;
 	private int postPriority;
+	private String regDate;
 	private Long categoryNo;
+	private String mainImage;
 
 	private List<DisplayedProductVo> displayedProducts;
 	private List<OptionVo> options;
@@ -50,6 +53,14 @@ public class ProductVo {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getCompleteCategory() {
+		return completeCategory;
+	}
+
+	public void setCompleteCategory(String completeCategory) {
+		this.completeCategory = completeCategory;
 	}
 
 	public String getMaterial() {
@@ -167,7 +178,7 @@ public class ProductVo {
 	public int getPreferenceScore() {
 		return preferenceScore;
 	}
-	
+
 	public void setPreferenceScore(int preferenceScore) {
 		this.preferenceScore = preferenceScore;
 	}
@@ -180,12 +191,28 @@ public class ProductVo {
 		this.postPriority = postPriority;
 	}
 
+	public String getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
+	}
+
 	public Long getCategoryNo() {
 		return categoryNo;
 	}
 
 	public void setCategoryNo(Long categoryNo) {
 		this.categoryNo = categoryNo;
+	}
+
+	public String getMainImage() {
+		return mainImage;
+	}
+
+	public void setMainImage(String mainImage) {
+		this.mainImage = mainImage;
 	}
 
 	public List<DisplayedProductVo> getDisplayedProducts() {
@@ -214,25 +241,15 @@ public class ProductVo {
 
 	@Override
 	public String toString() {
-		return "ProductVo [no=" + no + ", code=" + code + ", name=" + name + ", material=" + material + ", description="
-				+ description + ", detailDescription=" + detailDescription + ", supplyPrice=" + supplyPrice
-				+ ", consumerPrice=" + consumerPrice + ", manufacturer=" + manufacturer + ", supplier=" + supplier
-				+ ", home=" + home + ", manufactureDate=" + manufactureDate + ", restockCheck=" + restockCheck
-				+ ", purchaseCount=" + purchaseCount + ", displayCheck=" + displayCheck + ", saleCheck=" + saleCheck
-				+ ", hits=" + hits + ", preferenceScore=" + preferenceScore + ", postPriority=" + postPriority
-				+ ", categoryNo=" + categoryNo + ", displayedProducts=" + displayedProducts + ", options=" + options
-				+ ", productImages=" + productImages + ", getNo()=" + getNo() + ", getCode()=" + getCode()
-				+ ", getName()=" + getName() + ", getMaterial()=" + getMaterial() + ", getDescription()="
-				+ getDescription() + ", getDetailDescription()=" + getDetailDescription() + ", getSupplyPrice()="
-				+ getSupplyPrice() + ", getConsumerPrice()=" + getConsumerPrice() + ", getManufacturer()="
-				+ getManufacturer() + ", getSupplier()=" + getSupplier() + ", getHome()=" + getHome()
-				+ ", getManufactureDate()=" + getManufactureDate() + ", getRestockCheck()=" + getRestockCheck()
-				+ ", getPurchaseCount()=" + getPurchaseCount() + ", getDisplayCheck()=" + getDisplayCheck()
-				+ ", getSaleCheck()=" + getSaleCheck() + ", getHits()=" + getHits() + ", getPreferenceScore()="
-				+ getPreferenceScore() + ", getPostPriority()=" + getPostPriority() + ", getCategoryNo()="
-				+ getCategoryNo() + ", getDisplayedProducts()=" + getDisplayedProducts() + ", getOptions()="
-				+ getOptions() + ", getProductImages()=" + getProductImages() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+		return "ProductVo [no=" + no + ", code=" + code + ", name=" + name + ", completeCategory=" + completeCategory
+				+ ", material=" + material + ", description=" + description + ", detailDescription=" + detailDescription
+				+ ", supplyPrice=" + supplyPrice + ", consumerPrice=" + consumerPrice + ", manufacturer=" + manufacturer
+				+ ", supplier=" + supplier + ", home=" + home + ", manufactureDate=" + manufactureDate
+				+ ", restockCheck=" + restockCheck + ", purchaseCount=" + purchaseCount + ", displayCheck="
+				+ displayCheck + ", saleCheck=" + saleCheck + ", hits=" + hits + ", preferenceScore=" + preferenceScore
+				+ ", postPriority=" + postPriority + ", regDate=" + regDate + ", categoryNo=" + categoryNo
+				+ ", mainImage=" + mainImage + ", displayedProducts=" + displayedProducts + ", options=" + options
+				+ ", productImages=" + productImages + "]";
 	}
 
 }

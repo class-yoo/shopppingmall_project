@@ -20,7 +20,7 @@ public class ProductDao {
 	private SqlSession sqlSession;
 
 	public int insertProduct(ProductVo productVo) {
-		
+
 		return sqlSession.insert("product.insertProduct", productVo);
 	}
 
@@ -34,25 +34,22 @@ public class ProductDao {
 		return sqlSession.update("product.updateProduct", productVo);
 	}
 
-	public int deleteProduct(Long productNo) {
-		return sqlSession.update("product.deleteProduct", productNo);
-	}
-
-	public Long selectProductCount(String keyword, String category) {
-		Map<String, String> map = new HashMap<>();
+	public Long selectProductCount(String keyword, Long categoryNo) {
+		Map<String, Object> map = new HashMap<>();
 		map.put("keyword", keyword);
-		map.put("category", category);
+		map.put("categoryNo", categoryNo);
 
 		return sqlSession.selectOne("product.selectProductCount", map);
 	}
 
-	public List<ProductVo> selectSearchProductList(String keyword, String category, int startPageNum, int showBoardNum) {
+	public List<ProductVo> selectSearchProductList(String keyword, Long categoryNo, int startPageNum,
+			int showProductNum) {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyword", keyword);
-		map.put("category", category);
+		map.put("categoryNo", categoryNo);
 		map.put("startPageNum", startPageNum);
-		map.put("showBoardNum", showBoardNum);
+		map.put("showProductNum", showProductNum);
 		return sqlSession.selectList("product.selectSearchProductList", map);
 	}
 
@@ -66,6 +63,39 @@ public class ProductDao {
 
 	public int insertImage(ProductImage image) {
 		return sqlSession.insert("product.insertImage", image);
+	}
+
+	public int deleteProduct(Long productNo) {
+		return sqlSession.delete("product.deleteProduct", productNo);
+	}
+
+	public int deleteOptionByProductNo(Long productNo) {
+		return sqlSession.delete("product.deleteOptionByProductNo", productNo);
+	}
+
+	public int deleteDisplayedProductByProductNo(Long productNo) {
+		return sqlSession.delete("product.deleteDisplayedProductByProductNo", productNo);
+
+	}
+
+	public int deleteImageByProductNo(Long productNo) {
+		return sqlSession.delete("product.deleteImageByProductNo", productNo);
+
+	}
+
+	public int deleteImageByImageNo(Long imageNo) {
+		return sqlSession.delete("product.deleteImageByImageNo", imageNo);
+	}
+
+	public int deleteOptionByOptionNo(Long optionNo) {
+		return sqlSession.delete("product.deleteOptionByOptionNo", optionNo);
+	}
+
+	public int deleteDisplayedProductByOption(Long productNo, String optionValue) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("productNo", productNo);
+		map.put("optionValue", optionValue);
+		return sqlSession.delete("product.deleteDisplayedProductByOption", map);
 	}
 
 }

@@ -43,20 +43,20 @@ public class Paging {
 //	}
 	
 	// 총 페이지의 마지막 번호
-	public void makeLastPageNum(Long totalBoardCount ,int showBoardNum) {
+	public void makeLastPageNum(Long totalProductCount ,int showProductNum) {
 		
-		Long total = totalBoardCount;
+		Long total = totalProductCount;
 
-		if (total % showBoardNum == 0) {
+		if (total % showProductNum == 0) {
 			// 총 게시글숫자에서 한페이지에 보여줄 숫자로 나눈 값이 0일때, 즉 100개의 게시물은 총 10개 페이지로 나타낼 수 있다.>>
 			// page블록이 2개 필요 >> < 1 2 3 4 5 > < 6 7 8 9 10 >
 			// 예를들어 80개의 게시물이있다면 10개로 나눴을때 8.0이 되고 8개의 페이지로 나타낼 수 있다.
-			lastPageNum = (int) Math.floor(total / showBoardNum);
+			lastPageNum = (int) Math.floor(total / showProductNum);
 		} else {
 			// 만약 총 게시글의 숫자가 99 일때 한페이지에 보여줄 숫자인 10으로 나눴을때 9.9가 나온다 이때는 9페이지로 나타낼 수 없기 때문에
 			// +1 을하여 10페이지에 나타낸다.
 			// 예를들어 85개의 게이물이 있다면 10개로 나눴을때 8.5가 되고 8개의 페이지는 부족하기때문에 마지막 페이지는 9가 된다.
-			lastPageNum = (int) Math.floor(total / showBoardNum) + 1;
+			lastPageNum = (int) Math.floor(total / showProductNum) + 1;
 		}
 	}
 	
@@ -79,15 +79,15 @@ public class Paging {
 		blockLastNum = blockLastNum < lastPageNum ? blockLastNum : lastPageNum;
 	}
 	
-	public void makeStartPageNum(int showBoardNum) {
-		startPageNum = (curPageNum -1) *showBoardNum;
+	public void makeStartPageNum(int showProductNum) {
+		startPageNum = (curPageNum -1) *showProductNum;
 	}
 	
-	public void pagingSetting(Long totalBoardCount, int showBoardNum, int curPageNum) {
-		makeLastPageNum(totalBoardCount, showBoardNum);
+	public void pagingSetting(Long totalProductCount, int showProductNum, int curPageNum) {
+		makeLastPageNum(totalProductCount, showProductNum);
 		this.curPageNum = curPageNum;
 		makeBlock(curPageNum);
-		makeStartPageNum(showBoardNum);
+		makeStartPageNum(showProductNum);
 		
 	}
 }

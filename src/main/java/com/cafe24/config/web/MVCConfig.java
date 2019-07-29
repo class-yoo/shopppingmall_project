@@ -26,19 +26,6 @@ import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 @EnableWebMvc
 public class MVCConfig extends WebMvcConfigurerAdapter {
 	//
-	// View Resolver
-	//
-	@Bean
-	public ViewResolver viewResolver() {
-		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		resolver.setPrefix("/WEB-INF/views/");
-		resolver.setSuffix(".jsp");
-		resolver.setExposeContextBeansAsAttributes(true);
-
-		return resolver;
-	}
-
-	//
 	// Default Servlet Handler
 	//
 	@Override

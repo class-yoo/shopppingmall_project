@@ -3,13 +3,17 @@ package com.cafe24.shoppingmall.controller.api;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -27,7 +31,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.cafe24.shoppingmall.config.AppConfig;
 import com.cafe24.shoppingmall.config.WebConfig;
-import com.cafe24.shoppingmall.service.OrderService;
 import com.cafe24.shoppingmall.service.ProductService;
 import com.cafe24.shoppingmall.vo.DisplayedProductVo;
 import com.cafe24.shoppingmall.vo.OptionVo;
@@ -59,7 +62,8 @@ public class ProductControllerTest {
 	public void testDIOrderService() {
 		assertNotNull(productService);
 	}
-
+	
+	@Ignore
 	@Test
 	public void addProductTest() throws Exception {
 
@@ -108,16 +112,86 @@ public class ProductControllerTest {
 		.andExpect(jsonPath("$.result", is("success")));
 		
 	}
+	
+	@Ignore
+	@Test
+	public void modifyProductTest() throws Exception {
 
+		ProductVo productVo = new ProductVo();
+		productVo.setNo(38L);
+		productVo.setCode("P001TBT");
+		productVo.setName("투버튼자켓");
+		productVo.setMaterial("캐시미어 100%");
+		productVo.setDescription("!@#@!#@!");
+		productVo.setDetailDescription("detail!@#!#!@");
+		productVo.setSupplyPrice(43000);
+		productVo.setConsumerPrice(25000);
+		productVo.setManufacturer("나이스"); 
+		productVo.setSupplier("나이스");
+		productVo.setHome("미국");
+		productVo.setManufactureDate("2019-07-21");
+		productVo.setRestockCheck("N");
+		productVo.setPurchaseCount(126L);
+		productVo.setDisplayCheck("Y");
+		productVo.setSaleCheck("Y");
+		productVo.setHits(219L);
+		productVo.setPreferenceScore(9);
+		productVo.setPostPriority(0);
+		productVo.setCategoryNo(1L);
+		
+		
+		ResultActions resultActions = mockMvc
+				.perform(put("/product/modify", productVo)
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(new Gson().toJson(productVo)));
+		
+		resultActions.andExpect(status().isOk())
+		.andDo(print())
+		.andExpect(jsonPath("$.result", is("success")));
+		
+	}
+	
+	@Test
+	public void getProductListTest() throws Exception {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("keyword", "");
+		map.put("category", 0);
+		map.put("curpageNum", 1);
+		map.put("showProductNum", 10);
+		
+		ResultActions resultActions = mockMvc
+				.perform(post("/product/list")
+						.contentType(MediaType.APPLICATION_JSON).content(new Gson().toJson(map)));
+
+		resultActions.andExpect(status().isOk()).andDo(print()).andExpect(jsonPath("$.result", is("success")));
+
+	}
+	
+	
+	
 	@Ignore
 	@Test
 	public void getProductTest() throws Exception {
 
 		Long productNo = 1L;
-
+		
 		ResultActions resultActions = mockMvc
 				.perform(get("/product/{productNo}", productNo).contentType(MediaType.APPLICATION_JSON));
 
+		resultActions.andExpect(status().isOk()).andDo(print()).andExpect(jsonPath("$.result", is("success")));
+
+	}
+	
+	@Ignore
+	@Test
+	public void removeProductTest() throws Exception {
+
+		Long productNo = 41L;
+		ResultActions resultActions = mockMvc
+				.perform(delete("/product/remove/{productNo}", productNo).contentType(MediaType.APPLICATION_JSON));
+		
 		resultActions.andExpect(status().isOk()).andDo(print()).andExpect(jsonPath("$.result", is("success")));
 
 	}
