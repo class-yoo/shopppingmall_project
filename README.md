@@ -57,11 +57,11 @@
 
 ##### 상품관련 테이블
 
-|            API목록             |            URL             | 예상일정 |    예상소요시간    |  개발일정   | 개발시간  |                          작업결과서                          |
-| :----------------------------: | :------------------------: | :------: | :----------------: | :---------: | :-------: | :----------------------------------------------------------: |
-| 주문상세보기 API(회원, 비회원) |      order/{orderNo}       |   7.22   |     2h(2시간)      |    7.23     | 2h(2시간) | [보기](https://github.com/Yujaehyeong/shoppingmall_1/wiki/3-Week-%EC%A3%BC%EB%AC%B8) |
-|    상품추가하기API(관리자)     |        product/add         |   7.24   |     2h(2시간)      | 7.24 - 7.25 | 2h(2시간) | [보기](https://github.com/Yujaehyeong/shoppingmall_1/wiki/4-Week-%EC%83%81%ED%92%88%EA%B4%80%EB%A6%AC) |
-|    상품삭제하기API(관리자)     | product/remove/{productNo} |   7.25   |     2h(2시간)      |    7.25     | 30M(30분) | [보기](https://github.com/Yujaehyeong/shoppingmall_1/wiki/4-Week-%EC%83%81%ED%92%88%EA%B4%80%EB%A6%AC) |
-|    상품수정하기API(관리자)     |       product/modify       |   7.25   |     2h(2시간)      |    7.25     | 2h(2시간) | [보기](https://github.com/Yujaehyeong/shoppingmall_1/wiki/4-Week-%EC%83%81%ED%92%88%EA%B4%80%EB%A6%AC) |
-|        상품목록보기API         |       product/list       |   7.25   | 2h 30M(2시간 30분) |    7.29     | 2h(2시간) | [보기](https://github.com/Yujaehyeong/shoppingmall_1/wiki/4-Week-%EC%83%81%ED%92%88%EA%B4%80%EB%A6%AC) |
+|         API목록         |         URL         | 예상일정 |    예상소요시간    |  개발일정   | 개발시간  |                          작업결과서                          |
+| :---------------------: | :-----------------: | :------: | :----------------: | :---------: | :-------: | :----------------------------------------------------------: |
+|    상품정보보기 API     | product/{productNo} |   7.23   |     2h(2시간)      |    7.23     | 2h(2시간) | [보기](https://github.com/Yujaehyeong/shoppingmall_1/wiki/3-Week-%EC%A3%BC%EB%AC%B8) |
+| 상품추가하기API(관리자) |     product/add     |   7.24   |     2h(2시간)      | 7.24 - 7.25 | 2h(2시간) | [보기](https://github.com/Yujaehyeong/shoppingmall_1/wiki/4-Week-%EC%83%81%ED%92%88%EA%B4%80%EB%A6%AC) |
+| 상품삭제하기API(관리자) | product/{productNo} |   7.25   |     2h(2시간)      |    7.25     | 30M(30분) | [보기](https://github.com/Yujaehyeong/shoppingmall_1/wiki/4-Week-%EC%83%81%ED%92%88%EA%B4%80%EB%A6%AC) |
+| 상품수정하기API(관리자) |   product/modify    |   7.25   |     2h(2시간)      |    7.25     | 2h(2시간) | [보기](https://github.com/Yujaehyeong/shoppingmall_1/wiki/4-Week-%EC%83%81%ED%92%88%EA%B4%80%EB%A6%AC) |
+|     상품목록보기API     |    product/list     |   7.25   | 2h 30M(2시간 30분) |    7.29     | 2h(2시간) | [보기](https://github.com/Yujaehyeong/shoppingmall_1/wiki/4-Week-%EC%83%81%ED%92%88%EA%B4%80%EB%A6%AC) |
 
