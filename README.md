@@ -1,6 +1,4 @@
-# Shopping mall _ Project
-
-
+# Shopping mall _ Project 작업계획서
 
 ### Swagger URL List
 
