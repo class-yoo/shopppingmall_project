@@ -35,14 +35,11 @@ public class UserAPIContoller {
 	@Autowired
 	private UserService userService;
 
-	/**
-	 * 기능 : 아이디 중복 확인
+	/** TODO Message
 	 * 
-	 * @param id - 중복을 검사할 아이디
-	 * @return
-	 * 
+	 * 아이디 중복을 확인하는 메소드이며 String 형태의 id를 파라미터로받는다.
+	 * 유효성검사를 실시한다.
 	 */
-	
 	@ApiOperation(value = "아이디 존재 여부")
 	@RequestMapping(value = "/checkid/{id}", method = RequestMethod.GET)
 	public ResponseEntity<JSONResult> checkId(@PathVariable(value = "id") String id) {
@@ -72,7 +69,11 @@ public class UserAPIContoller {
 		return makeResponseEntity(status, jsonResult);
 	}
 	
-	
+	/** TODO Message
+	 * 
+	 * 회원정보를 등록하는 메소드이면 회원객체인 UserVo와 유효성검사 결과가 저장되는 BindingResult 객체를 파라미터로 받는다.
+	 * 유효성검사를 실시한다.
+	 */
 	@ApiOperation(value = "회원가입")
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public ResponseEntity<JSONResult> join(@RequestBody @Valid UserVo userVo , BindingResult result) {
@@ -101,7 +102,11 @@ public class UserAPIContoller {
 		return makeResponseEntity(status, jsonResult);
 	}
 	
-	
+	/** TODO Message
+	 * 
+	 * 회원정보를 등록하는 메소드이면 회원객체인 UserVo와 유효성검사 결과가 저장되는 BindingResult 객체를 파라미터로 받는다.
+	 * 유효성검사를 실시한다.
+	 */
 	@ApiOperation(value = "로그인")
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<JSONResult> login(@RequestBody UserVo userVo) {
@@ -136,7 +141,6 @@ public class UserAPIContoller {
 		return makeResponseEntity(status, jsonResult);
 
 	}
-	
 	
 	public ResponseEntity<JSONResult> makeResponseEntity(HttpStatus status, JSONResult jsonResult){
 		return ResponseEntity.status(status).body(jsonResult);

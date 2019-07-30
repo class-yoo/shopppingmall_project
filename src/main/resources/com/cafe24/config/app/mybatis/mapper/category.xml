@@ -3,66 +3,30 @@
 
 <mapper namespace="category">
 	
-	<select id="selectUserByUserId" resultType="string" parameterType="string">
+	<insert id="insertCategory" parameterType="category">
 		<![CDATA[
-		select  cast(AES_DECRYPT(id, 'shop') as char) as 'id'
-		from user
-		where id = AES_ENCRYPT(#{id}, 'shop')
-		]]>
-	</select>
-	
-	<insert id="insertUser" parameterType="user">
-		<![CDATA[
-			insert
-			into user
-			values(AES_ENCRYPT(#{id}, 'shop'), AES_ENCRYPT(#{email}, 'shop'), 
-			sha(#{password}), AES_ENCRYPT(#{name}, 'shop'), #{birth},
-			 AES_ENCRYPT(#{contact}, 'shop'), #{gender}, #{isWithdrawal});
+		insert
+		into category
+		values(null, #{groupNo}, #{code}, #{name}, #{sortNo}, #{depth}, #{parentCategoryNo})
 		]]>
 	</insert>
+	
+	<select id="selectCategoryList" resultType="category">
+		<![CDATA[
+			select no, group_no as 'groupNo', code, name, sort_no as 'sortNo', depth, parent_category_no as 'parentCategoryNo'
+			from category
+			order by group_no, sort_no, depth 
+		]]>
+	</select>
 
-	<select id="getByEmail" resultType="user" parameterType="string">
-		<![CDATA[
-		select no, name, email, gender
-		from user
-		where email = #{email}
-		]]>
-	</select>
 	
-	<select id="getById" resultType="user" parameterType="string">
+	<delete id="deleteCategory" parameterType="long" >
 		<![CDATA[
-		select id, email, name
-		from user
-		where no= #{no}
-		
+		delete 
+		from category
+		where no = #{categoryNo}
 		]]>
-	</select>
+	</delete>
 	
-	<select id="selectUserByUserIdAndPassword" parameterType="user" resultType="user">
-		<![CDATA[
-		select cast(AES_DECRYPT(id, 'shop') as char) as 'id', cast(AES_DECRYPT(email, 'shop') as char) as 'email',
-		cast(AES_DECRYPT(name, 'shop') as char) as 'name'
-		from user
-		where id = AES_ENCRYPT(#{id}, 'shop') and password = sha(#{password})
-		
-		]]>
-	</select>
-	
-	<update id="update" parameterType="user">
-		<![CDATA[
-		update user
-			set name = #{name},
-		]]>
-		<if test="password != ''">
-			<![CDATA[
-			password= #{password},
-			]]>
-		</if>
-		<![CDATA[
-			gender= #{gender}
-			where no = #{no}
-		]]>
-	</update>
- 
 
 </mapper>

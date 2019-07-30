@@ -24,7 +24,7 @@ public class CategoryAPIController {
 	private CategoryService categoryService;
 	
 	@ApiOperation(value = "카테고리추가하기")
-	@RequestMapping(value="/add", method=RequestMethod.POST)
+	@RequestMapping(value="", method=RequestMethod.POST)
 	public JSONResult add(@RequestBody CategoryVo categoryVo) {
 		boolean addResult = categoryService.add(categoryVo);
 		
@@ -41,7 +41,7 @@ public class CategoryAPIController {
 	}
 	
 	@ApiOperation(value = "카테고리삭제하기")
-	@RequestMapping(value="/remove/{categoryNo}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/{categoryNo}", method=RequestMethod.DELETE)
 	public JSONResult remove(@PathVariable Long categoryNo) {
 		
 		boolean removeResult = categoryService.remove(categoryNo);

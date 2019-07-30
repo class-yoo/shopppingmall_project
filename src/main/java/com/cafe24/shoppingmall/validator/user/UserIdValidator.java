@@ -1,10 +1,8 @@
 package com.cafe24.shoppingmall.validator.user;
 
 import java.util.regex.Pattern;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
 import com.cafe24.shoppingmall.validator.constraint.user.ValidUserId;
 
 public class UserIdValidator implements ConstraintValidator<ValidUserId, String> {
@@ -14,7 +12,7 @@ public class UserIdValidator implements ConstraintValidator<ValidUserId, String>
 	
 	public void initialize(ValidUserId constraintAnnotation) {
 	}
-
+	
 	public boolean isValid(String value, ConstraintValidatorContext context) {
 		if (value == null || value.length() == 0 || "".contentEquals(value)) {
 			return false;

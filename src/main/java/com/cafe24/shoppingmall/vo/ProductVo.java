@@ -26,11 +26,11 @@ public class ProductVo {
 	private String regDate;
 	private Long categoryNo;
 	private String mainImage;
-
+	
 	private List<DisplayedProductVo> displayedProducts;
 	private List<OptionVo> options;
 	private List<ProductImage> productImages;
-
+	
 	public Long getNo() {
 		return no;
 	}

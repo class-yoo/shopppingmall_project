@@ -35,9 +35,10 @@
 		<![CDATA[
 			insert
 			into product
-			values(null, #{code}, #{name}, #{completeCategory}, #{material}, #{description}, #{detailDescription}, #{supplyPrice}, #{consumerPrice},
-			#{manufacturer}, #{supplier}, #{home}, #{manufactureDate}, #{restockCheck},#{purchaseCount}, #{displayCheck}, #{saleCheck}, #{hits}, #{preferenceScore},
-			#{postPriority}, #{categoryNo});
+			values(null, #{code}, #{name}, #{completeCategory}, #{material}, #{description}, #{detailDescription},
+			#{supplyPrice}, #{consumerPrice}, #{manufacturer}, #{supplier}, #{home}, #{manufactureDate}, 
+			#{restockCheck},#{purchaseCount}, #{displayCheck}, #{saleCheck}, #{hits}, #{preferenceScore},
+			#{postPriority}, now(), #{categoryNo});
 		]]>
 		<selectKey  keyProperty="no" resultType="long" order="AFTER">
                 SELECT LAST_INSERT_ID()
@@ -68,7 +69,6 @@
 			values(null , #{imagePath}, #{mainImageCheck}, #{productNo})
 		]]>
 	</insert>
-	
 	
 	<select id="selectProductByProductNo" resultMap="productMap" parameterType="long">
 		<![CDATA[

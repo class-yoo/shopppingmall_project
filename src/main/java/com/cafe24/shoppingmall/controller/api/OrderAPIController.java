@@ -23,7 +23,7 @@ public class OrderAPIController {
 	private OrderService OrderService;
 	
 	@ApiOperation(value = "주문하기")
-	@RequestMapping(value="/add", method=RequestMethod.POST)
+	@RequestMapping(value="", method=RequestMethod.POST)
 	public JSONResult add(@RequestBody OrderVo orderVo) {
 		
 		System.out.println(orderVo);

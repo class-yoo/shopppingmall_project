@@ -30,6 +30,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.cafe24.shoppingmall.config.AppConfig;
 import com.cafe24.shoppingmall.config.WebConfig;
 import com.cafe24.shoppingmall.service.CartService;
 import com.cafe24.shoppingmall.service.OrderService;
@@ -37,7 +38,6 @@ import com.cafe24.shoppingmall.vo.CartVo;
 import com.cafe24.shoppingmall.vo.OrderProductVo;
 import com.cafe24.shoppingmall.vo.OrderVo;
 import com.google.gson.Gson;
-import com.cafe24.shoppingmall.config.AppConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { AppConfig.class, WebConfig.class })
@@ -111,7 +111,7 @@ public class OrderContollerTest {
 		orderVo.setOrderProducts(orderProductVos);
 
 		ResultActions resultActions = mockMvc.perform(
-				post("/order/add").contentType(MediaType.APPLICATION_JSON).content(new Gson().toJson(orderVo)));
+				post("/order").contentType(MediaType.APPLICATION_JSON).content(new Gson().toJson(orderVo)));
 
 		resultActions.andExpect(status().isOk()).andDo(print()).andExpect(jsonPath("$.result", is("success")));
 	}

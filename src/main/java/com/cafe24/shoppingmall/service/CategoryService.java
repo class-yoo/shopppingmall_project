@@ -18,14 +18,14 @@ public class CategoryService {
 
 	public boolean add(CategoryVo categoryVo) {
 		
-		return false;
+		return 1 == categoryDao.insertCategory(categoryVo);
 	}
 
 	public List<CategoryVo> getCategoryList() {
-		return null;
+		return categoryDao.selectCategoryList();
 	}
 
 	public boolean remove(Long categoryNo) {
-		return false;
+		return 1 == categoryDao.deleteCategory(categoryNo);
 	}
 }
