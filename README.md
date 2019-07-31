@@ -1,4 +1,4 @@
-# Shopping mall _ Project 작업계획서
+Shopping mall _ Project 작업계획서
 
 ### Swagger URL List
 
@@ -64,4 +64,20 @@
 | 상품삭제하기API(관리자) | product/{productNo} |   7.25   |     2h(2시간)      |    7.25     | 30M(30분) | [보기](https://github.com/Yujaehyeong/shoppingmall_1/wiki/4-Week-%EC%83%81%ED%92%88%EA%B4%80%EB%A6%AC) |
 | 상품수정하기API(관리자) |   product/modify    |   7.25   |     2h(2시간)      |    7.25     | 2h(2시간) | [보기](https://github.com/Yujaehyeong/shoppingmall_1/wiki/4-Week-%EC%83%81%ED%92%88%EA%B4%80%EB%A6%AC) |
 |     상품목록보기API     |    product/list     |   7.25   | 2h 30M(2시간 30분) |    7.29     | 2h(2시간) | [보기](https://github.com/Yujaehyeong/shoppingmall_1/wiki/4-Week-%EC%83%81%ED%92%88%EA%B4%80%EB%A6%AC) |
+
+
+
+------
+
+
+
+### 전체구현일정 테이블
+
+|       기능        |           일정            | 구현완료 여부 | 기능추가여부 |
+| :---------------: | :-----------------------: | :-----------: | :----------: |
+|   유저관련 기능   |       7.15  ~ 7. 16       |       O       |      ?       |
+| 장바구니관련 기능 |        7.17 ~ 7.17        |       O       |      ?       |
+|   주문관련 기능   | 7.18 ~ 7.19 / 7.22 ~ 7.23 |       O       |      ?       |
+|   상품관련 기능   | 7.23~ 7.26 / 7.29 ~ 7.29  |       O       |      ?       |
+|  프론트서버 구현  |           7.30~           |       X       |      ?       |
 
