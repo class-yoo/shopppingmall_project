@@ -10,6 +10,8 @@ import com.cafe24.shoppingmall.validator.constraint.user.ValidUserId;
 
 public class UserVo {
 	
+	private Long no;
+	
 	@ValidUserId
 	private String id;
 	
@@ -22,6 +24,8 @@ public class UserVo {
 		message="비밀번호는 8자 이상 20자 이하의 알파벳, 숫자, 특수문자를 조합하여 작성해야 합니다.") 
 	@Length(min=8, max=20, message="비밀번호는 8자 이상 20자 이하로 입력해야 합니다.")
 	private String password;
+	
+	private String role = "ROLE_USER";
 	
 	@NotEmpty
 	@Length(min =2, max =8)
@@ -48,6 +52,14 @@ public class UserVo {
 		this.id = id;
 	}
 	
+	public Long getNo() {
+		return no;
+	}
+
+	public void setNo(Long no) {
+		this.no = no;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -110,6 +122,14 @@ public class UserVo {
 
 	public void setIsWithdrawal(String isWithdrawal) {
 		this.isWithdrawal = isWithdrawal;
+	}
+	
+	public String getRole() {
+		return role;
+	}
+	
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	@Override

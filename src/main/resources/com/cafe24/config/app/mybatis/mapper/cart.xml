@@ -11,14 +11,17 @@
 	
 	<resultMap type="displayedProduct" id="displayedproductMap">
 		<id column="displayed_product_no" property="no"/>
+		<result column="displayed_product_name" property="name"/>
 		<result column="displayed_product_code" property="code"/>
 		<result column="displayed_product_option" property="option"/>
+		<result column="main_image_path" property="mainImagePath"/>
 		<result column="displayed_product_amount" property="amount"/>
 		<result column="stock_check" property="stockCheck"/>
-		<association property="productVo" resultMap="productMap"/>
+		<result column="price" property="price"/>
+		<result column="product_no" property="productNo"/>
 	</resultMap>
 	
-	<resultMap type="product" id="productMap">
+	<!-- <resultMap type="product" id="productMap">
 		<id column="product_no" property="no"/>
 		<result column="product_code" property="code"/>
 		<result column="consumer_price" property="consumerPrice"/>
@@ -28,7 +31,7 @@
 	<resultMap type="productImage" id="productImageMap">
 		<id column="image_no" property="no"/>
 		<result column="image_path" property="imagePath"/>
-	</resultMap>
+	</resultMap> -->
 	
 	<insert id="insertCart" parameterType="cart">
 		<![CDATA[
@@ -40,18 +43,14 @@
 
 	<select id="selectCartListByUserId" resultMap="cartMap" parameterType="string">
 		<![CDATA[
-		select a.no, a.amount, a.displayed_product_no, b.code as 'displayed_product_code',
-		b.option as 'displayed_product_option', b.amount as 'displayed_product_amount', b.stock_check,
-    	c.no as 'product_no', c.code as 'product_code', c.consumer_price,
-    	d.no as 'image_no', d.image_path
+		select a.no, a.amount, a.displayed_product_no, b.code as 'displayed_product_code', b.name as 'displayed_product_name',
+		b.option as 'displayed_product_option', b.main_image_path, b.amount as 'displayed_product_amount', b.stock_check,
+    	b.price, b.product_no
     	
-    	from cart a, displayed_product b, product c, image d
+    	from cart a, displayed_product b
 		
-		where a.displayed_product_no = b.no and
-				b.product_no = c.no and 
-				c.no = d.product_no and 
-				d.main_image_check = 'Y' and
-				a.id = aes_encrypt(#{userId}, 'shop');
+		where  a.id = aes_encrypt(#{userId}, 'shop') and
+				a.displayed_product_no = b.no
 		]]>
 	</select>
 	

@@ -4,6 +4,8 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +27,6 @@ public class ProductAPIController {
 	
 	@Autowired
 	private ProductService productService;
-	
 	
 	/** TODO Message - 상품추가하기
 	  * 
@@ -98,7 +99,7 @@ public class ProductAPIController {
 	  * */
 	@ApiOperation(value = "상품목록보기")
 	@RequestMapping(value="/list/{keyword}/{categoryNo}/{curPageNum}/{showProductNum}", method=RequestMethod.GET)
-	public JSONResult list(@PathVariable (value="keyword") String keyword,
+	public ResponseEntity<JSONResult> list(@PathVariable (value="keyword") String keyword,
 			@PathVariable(value="categoryNo") Long categoryNo,
 			@PathVariable(value="curPageNum") int curPageNum,
 			@PathVariable(value="showProductNum") int showProductNum) {
@@ -111,8 +112,10 @@ public class ProductAPIController {
 		
 		List<ProductVo> list = productService.getSearchProductList(keyword, categoryNo, paging.getStartPageNum(), showProductNum);
 		
-		return JSONResult.success(list);
+		
+		return ResponseEntity.status(HttpStatus.OK).body(JSONResult.success(list));
 	}
+
 	
 	@ApiOperation(value = "상품이미지 추가하기")
 	@RequestMapping(value="image", method=RequestMethod.POST)

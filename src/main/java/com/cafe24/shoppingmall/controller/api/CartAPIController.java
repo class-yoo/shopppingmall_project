@@ -25,8 +25,8 @@ public class CartAPIController {
 	private CartService cartService;
 
 	@ApiOperation(value = "장바구니담기")
-	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public ResponseEntity<JSONResult> put(@RequestBody CartVo cartVo) {
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public ResponseEntity<JSONResult> add(@RequestBody CartVo cartVo) {
 		
 		HttpStatus status = HttpStatus.OK;
 		String message = null;

@@ -123,7 +123,7 @@
 	
 	<select id="selectSearchProductList" resultType="product" parameterType="map">
 		<![CDATA[
-		select a.no, a.name, a.consumer_price as 'consumerPrice', a.display_check as 'displayCheck',
+		select a.no, a.name, a.description, a.consumer_price as 'consumerPrice', a.display_check as 'displayCheck', 
 		a.sale_check as 'saleCheck', a.complete_category as 'completeCategory', a.reg_date as 'regDate',
 		b.image_path as 'mainImage'
 		from product a, image b

@@ -48,7 +48,7 @@ import com.google.gson.reflect.TypeToken;
 @ContextConfiguration(classes = { AppConfig.class, WebConfig.class })
 @WebAppConfiguration
 public class ProductControllerTest {
-
+	
 	private MockMvc mockMvc;
 
 	@Autowired
@@ -56,7 +56,7 @@ public class ProductControllerTest {
 
 	@Autowired
 	private ProductService productService;
-
+	
 	@Before
 	public void setup() {
 		CharacterEncodingFilter cef = new CharacterEncodingFilter();

@@ -26,4 +26,9 @@ public class UserDao {
 		UserVo loginUser = sqlSession.selectOne("user.selectUserByUserIdAndPassword", userVo);
 		return loginUser;
 	}
+
+	public UserVo get(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

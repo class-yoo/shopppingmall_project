@@ -58,19 +58,17 @@ public class CartContollerTest {
 		assertNotNull(cartService);
 	}
 
-	
-//	@Ignore
+	@Ignore
 	@Test
-	public void putCartTest() throws Exception {
+	public void addCartTest() throws Exception {
 		
 		CartVo cartVo = new CartVo();
-		cartVo.setAmount(150);
+		cartVo.setAmount(10);
 		cartVo.setDisplayedProductNo(1L);
 		cartVo.setUserId("hgdkk");
 		
 		ResultActions resultActions = mockMvc.perform(
-				post("/cart")
-				.contentType(MediaType.APPLICATION_JSON)
+				post("/cart").contentType(MediaType.APPLICATION_JSON)
 				.content(new Gson().toJson(cartVo)));
 		
 		resultActions.andExpect(status().isOk()).andDo(print())
@@ -78,17 +76,16 @@ public class CartContollerTest {
 				.andExpect(jsonPath("$.data", is(true)));
 	}
 	
-	@Ignore
+//	@Ignore
 	@Test
 	public void getCartListTest() throws Exception {
 		
 		ResultActions resultActions = mockMvc.perform(
-				get("/cart/list/{userId}", "hgdkkk")
+				get("/cart/list/{userId}", "hgdkk")
 				.contentType(MediaType.APPLICATION_JSON));
 
 		resultActions.andExpect(status().isOk()).andDo(print())
 				.andExpect(jsonPath("$.result", is("success")));
-		
 	}
-
+	
 }
