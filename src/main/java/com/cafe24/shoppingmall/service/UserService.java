@@ -18,7 +18,7 @@ public class UserService {
 
 		String userId = userDao.selectUserByUserId(id);
 		
-		return null == userId;
+		return null != userId;
 	}
 
 	public boolean join(UserVo userVo) {

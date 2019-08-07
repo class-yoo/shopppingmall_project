@@ -16,9 +16,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		
 		// 자원 서버 접근 권한 설정
 		http
-			.authorizeRequests()
-			.antMatchers("/cart/**").access("#oauth2.hasScope('read')")
-			.anyRequest().permitAll();
+			.authorizeRequests().anyRequest().access("#oauth2.hasScope('read')");
+		
 	}
 	
 	@Override

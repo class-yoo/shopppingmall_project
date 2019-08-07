@@ -9,7 +9,8 @@
 	</parent>
 	<artifactId>shoppingmall-backend</artifactId>
 	<packaging>war</packaging>
-
+	
+	
 	<dependencies>
 		<!-- Spring Core -->
 		<dependency>
@@ -17,7 +18,7 @@
 			<artifactId>spring-context</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-
+		
 		<!-- Spring Web -->
 		<dependency>
 			<groupId>org.springframework</groupId>

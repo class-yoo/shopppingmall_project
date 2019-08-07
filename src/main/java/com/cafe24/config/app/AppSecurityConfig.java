@@ -73,7 +73,7 @@ import com.cafe24.shoppingmall.security.CustomUrlAuthenticationSuccessHandler;
 @Configuration
 @EnableWebSecurity
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
-
+	
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
@@ -106,8 +106,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
 				//7. remember-me
 				rememberMeAuthenticationFilter()
 				));
-		
-
 		
 		return new FilterChainProxy(filterChains);
 	}

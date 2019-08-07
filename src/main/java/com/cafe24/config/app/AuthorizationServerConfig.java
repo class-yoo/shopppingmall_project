@@ -41,7 +41,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 			.scopes("read", "write", "trust")
 			.resourceIds("shoppingmall_api")
 			.secret("1234");
-			//.accessTokenValiditySeconds(60);
+		//.accessTokenValiditySeconds(60);
 		
 //		clients
 //			.jdbc(dataSource());

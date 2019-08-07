@@ -55,15 +55,16 @@ public class UserAPIContoller {
 		if(validatorResults.isEmpty() == false) {
 			for(ConstraintViolation<UserVo> validatorResult : validatorResults ) {
 				message = validatorResult.getMessage();
-				status = HttpStatus.BAD_REQUEST;
+				status = HttpStatus.OK;
 				jsonResult = JSONResult.fail(message);
 				return makeResponseEntity(status, jsonResult);
 			}
 		}
+		
 		boolean overlapCheckResult = userService.checkOverapId(id);
 		if(overlapCheckResult) {
-			message = "중복된 아이디가 있습니다!!";
-			status = HttpStatus.BAD_REQUEST;
+			message = "중복된 아이디가 있습니다.";
+			status = HttpStatus.OK;
 			jsonResult = JSONResult.fail(message);
 		}
 		return makeResponseEntity(status, jsonResult);
@@ -76,8 +77,9 @@ public class UserAPIContoller {
 	 */
 	@ApiOperation(value = "회원가입")
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public ResponseEntity<JSONResult> join(@RequestBody @Valid UserVo userVo , BindingResult result) {
+	public ResponseEntity<JSONResult> join(@RequestBody UserVo userVo , BindingResult result) {
 		
+		System.out.println(userVo);
 		HttpStatus status = HttpStatus.OK;
 		JSONResult jsonResult = JSONResult.success(true);
 		String message = null;
@@ -85,7 +87,7 @@ public class UserAPIContoller {
 		if( result.hasErrors() ) {
 			List<ObjectError> list = result.getAllErrors();
 			for(ObjectError error : list) {
-				status = HttpStatus.BAD_REQUEST;
+				status = HttpStatus.OK;
 				message = error.getDefaultMessage();
 				jsonResult = JSONResult.fail(message);
 				return makeResponseEntity(status, jsonResult);
@@ -94,7 +96,7 @@ public class UserAPIContoller {
 		
 		boolean emailOverlapCheckResult = userService.join(userVo);
 		if(!emailOverlapCheckResult) {
-			status = HttpStatus.BAD_REQUEST;
+			status = HttpStatus.OK;
 			message = "회원가입에 실패하였습니다.";
 			jsonResult = JSONResult.fail(message);
 		}
@@ -122,21 +124,14 @@ public class UserAPIContoller {
 		if(validatorResults.isEmpty() == false) {
 			for(ConstraintViolation<UserVo> validatorResult : validatorResults ) {
 				message = validatorResult.getMessage();
-				status = HttpStatus.BAD_REQUEST;
+				status = HttpStatus.OK;
 				jsonResult = JSONResult.fail(message);
 				return makeResponseEntity(status, jsonResult);
 			}
 		}
 		
 		UserVo loginUserVo = userService.login(userVo);
-		
-		if(loginUserVo == null) {
-			message = "아이디와 비밀번호를 확인하세요.";
-			status = HttpStatus.BAD_REQUEST;
-			jsonResult = JSONResult.fail(message);
-		}else {
-			jsonResult = JSONResult.success(loginUserVo);
-		}
+		jsonResult = JSONResult.success(loginUserVo);
 		
 		return makeResponseEntity(status, jsonResult);
 

@@ -53,7 +53,7 @@ public class UserContollerTest {
 		assertNotNull(userService);
 	}
 	
-	@Ignore
+//	@Ignore
 	@Test
 	public void checkOverlapIdTest() throws Exception {
 		ResultActions resultActions = mockMvc
@@ -64,7 +64,7 @@ public class UserContollerTest {
 		.andExpect(jsonPath("$.result", is("success")));
 	}
 	
-//	@Ignore
+	@Ignore
 	@Test
 	public void joinTest() throws Exception {
 		UserVo userVo = new UserVo();

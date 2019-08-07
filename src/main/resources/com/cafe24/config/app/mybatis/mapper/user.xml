@@ -11,7 +11,7 @@
 		]]>
 	</select>
 	
-	<insert id="insertUser" parameterType="user">
+	<!-- <insert id="insertUser" parameterType="user">
 		<![CDATA[
 			insert
 			into user
@@ -19,8 +19,18 @@
 			sha(#{password}), AES_ENCRYPT(#{name}, 'shop'), #{birth},
 			 AES_ENCRYPT(#{contact}, 'shop'), #{gender}, #{isWithdrawal});
 		]]>
+	</insert> -->
+	
+	<insert id="insertUser" parameterType="user">
+		<![CDATA[
+			insert
+			into user
+			values(AES_ENCRYPT(#{id}, 'shop'), AES_ENCRYPT(#{email}, 'shop'), 
+			sha(#{password}), AES_ENCRYPT(#{name}, 'shop'), now(),
+			 AES_ENCRYPT(#{contact}, 'shop'), 'M', 'N');
+		]]>
 	</insert>
-
+	
 	<select id="getByEmail" resultType="user" parameterType="string">
 		<![CDATA[
 		select no, name, email, gender
