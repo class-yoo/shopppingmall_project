@@ -1,5 +1,7 @@
 package com.cafe24.shoppingmall.repository;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -27,6 +29,10 @@ public class UserDao {
 		return loginUser;
 	}
 
+	public List<UserVo> selectUserList(){
+		return sqlSession.selectList("user.selectUserList");
+	}
+	
 	public UserVo get(String email) {
 		// TODO Auto-generated method stub
 		return null;

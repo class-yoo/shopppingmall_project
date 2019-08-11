@@ -59,8 +59,18 @@ public class ProductService {
 	}
 
 	public boolean remove(Long productNo) {
-		return 1==productDao.deleteOptionByProductNo(productNo) && 1 == productDao.deleteDisplayedProductByProductNo(productNo)
-				&& 1 == productDao.deleteImageByProductNo(productNo) && 1 == productDao.deleteProduct(productNo);
+		if(1==productDao.deleteOptionByProductNo(productNo) && 1 == productDao.deleteDisplayedProductByProductNo(productNo)
+				&& 1 == productDao.deleteImageByProductNo(productNo) && 1 == productDao.deleteProduct(productNo)) {
+			try {
+				throw new Exception();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return false;
+		}else {
+			return true;
+		}
+			
 	}
 
 	public Long getProductCount(String keyword, Long categoryNo) {

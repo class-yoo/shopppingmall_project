@@ -20,21 +20,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cafe24.shoppingmall.dto.JSONResult;
+import com.cafe24.shoppingmall.service.AdminService;
 import com.cafe24.shoppingmall.service.UserService;
 import com.cafe24.shoppingmall.vo.UserVo;
 
 import io.swagger.annotations.ApiOperation;
-import springfox.documentation.spring.web.json.Json;
 
-@RestController("userAPIController")
-@RequestMapping("/user")
-public class UserAPIContoller {
+@RestController("adminAPIController")
+@RequestMapping("/admin")
+public class AdminAPIContoller {
 
 //	@Autowired
 //	private MessageSource messageSource;
 
 	@Autowired
-	private UserService userService;
+	private AdminService adminService;
 
 	/** TODO Message
 	 * 
@@ -62,7 +62,7 @@ public class UserAPIContoller {
 			}
 		}
 		
-		boolean overlapCheckResult = userService.checkOverapId(id);
+		boolean overlapCheckResult = adminService.checkOverapId(id);
 		if(overlapCheckResult) {
 			message = "중복된 아이디가 있습니다.";
 			status = HttpStatus.OK;
@@ -95,7 +95,7 @@ public class UserAPIContoller {
 			}
 		}
 		
-		boolean emailOverlapCheckResult = userService.join(userVo);
+		boolean emailOverlapCheckResult = adminService.join(userVo);
 		if(!emailOverlapCheckResult) {
 			status = HttpStatus.OK;
 			message = "회원가입에 실패하였습니다.";
@@ -131,26 +131,12 @@ public class UserAPIContoller {
 			}
 		}
 		
-		UserVo loginUserVo = userService.login(userVo);
-		jsonResult = JSONResult.success(loginUserVo);
+		UserVo loginAdmin = adminService.login(userVo);
+		jsonResult = JSONResult.success(loginAdmin);
 		
 		return makeResponseEntity(status, jsonResult);
 
 	}
-	
-	/** TODO Message
-	 * 
-	 * 아이디 중복을 확인하는 메소드이며 String 형태의 id를 파라미터로받는다.
-	 * 유효성검사를 실시한다.
-	 */
-	@ApiOperation(value = "회원목록보기")
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public JSONResult getUserList() {
-		
-		List<UserVo> userList = userService.getUserList();
-		return JSONResult.success(userList);
-	}
-	
 	
 	public ResponseEntity<JSONResult> makeResponseEntity(HttpStatus status, JSONResult jsonResult){
 		return ResponseEntity.status(status).body(jsonResult);

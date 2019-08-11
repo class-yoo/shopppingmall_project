@@ -40,6 +40,8 @@ public class ProductAPIController {
 	public JSONResult add(@RequestBody ProductVo productVo) {
 		boolean addResult = productService.add(productVo);
 		
+		System.out.println(productVo);
+		
 		return JSONResult.success(addResult);
 	}
 	

@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="user">
+<mapper namespace="admin">
 	
-	<select id="selectUserByUserId" resultType="string" parameterType="string">
+	<select id="selectAdminByAdminId" resultType="string" parameterType="string">
 		<![CDATA[
 		select  cast(AES_DECRYPT(id, 'shop') as char) as 'id'
-		from user
+		from manager
 		where id = AES_ENCRYPT(#{id}, 'shop')
-		]]>
-	</select>
-	
-	<select id="selectUserList" resultType="user">
-		<![CDATA[
-		select  cast(AES_DECRYPT(id, 'shop') as char) as 'id', cast(AES_DECRYPT(email, 'shop') as char) as 'email',
-		cast(AES_DECRYPT(name, 'shop') as char) as 'name', cast(AES_DECRYPT(contact, 'shop') as char) as 'contact'
-		from user
 		]]>
 	</select>
 	
@@ -29,38 +21,28 @@
 		]]>
 	</insert> -->
 	
-	<insert id="insertUser" parameterType="user">
+	<insert id="insertAdmin" parameterType="user">
 		<![CDATA[
 			insert
-			into user
-			values(AES_ENCRYPT(#{id}, 'shop'), AES_ENCRYPT(#{email}, 'shop'), 
-			sha(#{password}), AES_ENCRYPT(#{name}, 'shop'), now(),
-			 AES_ENCRYPT(#{contact}, 'shop'), 'M', 'N');
+			into manager
+			values(AES_ENCRYPT(#{id}, 'shop'), sha(#{password}), AES_ENCRYPT(#{email}, 'shop'),
+			AES_ENCRYPT('tempAddress', 'shop'),AES_ENCRYPT(#{name}, 'shop'), AES_ENCRYPT(#{contact}, 'shop'));
 		]]>
 	</insert>
-	
-	<select id="getByEmail" resultType="user" parameterType="string">
-		<![CDATA[
-		select no, name, email, gender
-		from user
-		where email = #{email}
-		]]>
-	</select>
 	
 	<select id="getById" resultType="user" parameterType="string">
 		<![CDATA[
 		select id, email, name
-		from user
+		from manager
 		where no= #{no}
-		
 		]]>
 	</select>
 	
-	<select id="selectUserByUserIdAndPassword" parameterType="user" resultType="user">
+	<select id="selectAdminByAdminIdAndPassword" parameterType="user" resultType="user">
 		<![CDATA[
 		select cast(AES_DECRYPT(id, 'shop') as char) as 'id', cast(AES_DECRYPT(email, 'shop') as char) as 'email',
 		cast(AES_DECRYPT(name, 'shop') as char) as 'name'
-		from user
+		from manager
 		where id = AES_ENCRYPT(#{id}, 'shop') and password = sha(#{password})
 		
 		]]>
@@ -68,7 +50,7 @@
 	
 	<update id="update" parameterType="user">
 		<![CDATA[
-		update user
+		update manager
 			set name = #{name},
 		]]>
 		<if test="password != ''">
