@@ -5,7 +5,7 @@ import java.util.List;
 public class OrderVo {
 
 	private Long no;
-	private String orderNo;
+	private String receiver;
 	private String title;
 	private String description;
 	private String destination;
@@ -37,12 +37,12 @@ public class OrderVo {
 		this.no = no;
 	}
 
-	public String getOrderNo() {
-		return orderNo;
+	public String getReceiver() {
+		return receiver;
 	}
 
-	public void setOrderNo(String orderNo) {
-		this.orderNo = orderNo;
+	public void setReceiver(String receiver) {
+		this.receiver = receiver;
 	}
 
 	public String getTitle() {
@@ -215,13 +215,15 @@ public class OrderVo {
 
 	@Override
 	public String toString() {
-		return "OrderVo [no=" + no + ", orderNo=" + orderNo + ", title=" + title + ", destination=" + destination
-				+ ", detailAddress=" + detailAddress + ", postalCode=" + postalCode + ", requirement=" + requirement
-				+ ", phoneNumber=" + phoneNumber + ", contact=" + contact + ", email=" + email + ", password="
-				+ password + ", orderStatus=" + orderStatus + ", orderDate=" + orderDate + ", refundBank=" + refundBank
-				+ ", refundAccount=" + refundAccount + ", totalPrice=" + totalPrice + ", deliverStatus=" + deliverStatus
-				+ ", deliverNumber=" + deliverNumber + ", trackingNumber=" + trackingNumber + ", completeDeliverDate="
-				+ completeDeliverDate + ", userId=" + userId + ", orderProducts=" + orderProducts + "]";
+		return "OrderVo [no=" + no + ", receiver=" + receiver + ", title=" + title + ", description=" + description
+				+ ", destination=" + destination + ", detailAddress=" + detailAddress + ", postalCode=" + postalCode
+				+ ", requirement=" + requirement + ", phoneNumber=" + phoneNumber + ", contact=" + contact + ", email="
+				+ email + ", password=" + password + ", orderStatus=" + orderStatus + ", orderDate=" + orderDate
+				+ ", refundBank=" + refundBank + ", refundAccount=" + refundAccount + ", totalPrice=" + totalPrice
+				+ ", deliverStatus=" + deliverStatus + ", deliverNumber=" + deliverNumber + ", trackingNumber="
+				+ trackingNumber + ", completeDeliverDate=" + completeDeliverDate + ", userId=" + userId
+				+ ", orderProducts=" + orderProducts + "]";
 	}
 
+	
 }

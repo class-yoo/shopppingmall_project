@@ -16,25 +16,23 @@ public class OrderDao {
 	private SqlSession sqlSession;
 	
 	public int insertOrder(OrderVo orderVo) {
-		
 		return sqlSession.insert("order.insertOrder", orderVo);
 	}
 	
-	
 	public int insertOrderProduct(OrderProductVo orderProductVo) {
-		
 		return sqlSession.insert("order.insertOrderProduct", orderProductVo); 
-		
 	}
-
 
 	public List<OrderVo> selectOrderListByUserId(String userId) {
 		return sqlSession.selectList("order.selectOrderListByUserId", userId);
 	}
 
-
 	public OrderVo selectOrderByOrderNo(Long orderNo) {
 		return sqlSession.selectOne("order.selectOrderByOrderNo", orderNo);
+	}
+
+	public List<OrderVo> getOrderList() {
+		return sqlSession.selectList("order.getOrderList");
 	}
 
 }

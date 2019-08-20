@@ -54,5 +54,17 @@
 		]]>
 	</select>
 	
+	<select id="selectCartByCartNo" resultMap="cartMap" parameterType="long">
+		<![CDATA[
+		select a.no, a.amount, a.displayed_product_no, b.code as 'displayed_product_code', b.name as 'displayed_product_name',
+		b.option as 'displayed_product_option', b.main_image_path, b.amount as 'displayed_product_amount', b.stock_check,
+    	b.price, b.product_no
+    	
+    	from cart a, displayed_product b
+		
+		where  a.no = #{cartNo} and
+				a.displayed_product_no = b.no
+		]]>
+	</select>
 
 </mapper>

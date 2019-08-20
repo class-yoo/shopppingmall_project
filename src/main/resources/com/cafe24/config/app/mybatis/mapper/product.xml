@@ -82,34 +82,34 @@
 	
 	<select id="selectDisplayedProductsByProductNo" resultType="displayedProduct" parameterType="long">
 		<![CDATA[
-		select no, code, name, option, main_image_path as 'mainImagePath', amount,  stock_check as 'stockCheck',
-		additional_fee as 'additionalFee', price, product_no as 'productNo'
-		from displayed_product
-		where product_no = #{productNo}
+			select no, code, name, option, main_image_path as 'mainImagePath', amount,  stock_check as 'stockCheck',
+			additional_fee as 'additionalFee', price, product_no as 'productNo'
+			from displayed_product
+			where product_no = #{productNo}
 		]]>
 	</select>
 	
 	<select id="selectOptionsByProductNo" resultType="option" parameterType="long">
 		<![CDATA[
-		select no, option_code as 'code', option_key as 'optionKey', option_values as 'optionValues', product_no as 'productNo'
-		from product_option
-		where product_no = #{productNo}
+			select no, option_code as 'code', option_key as 'optionKey', option_values as 'optionValues', product_no as 'productNo'
+			from product_option
+			where product_no = #{productNo}
 		]]>
 	</select>
 	
 	<select id="selectImagesByProductNo" resultType="productImage" parameterType="long">
 		<![CDATA[
-		select no, image_path as 'imagePath', main_image_check as 'mainImageCheck', product_no as 'productNo'
-		from image
-		where product_no = #{productNo}
+			select no, image_path as 'imagePath', main_image_check as 'mainImageCheck', product_no as 'productNo'
+			from image
+			where product_no = #{productNo}
 		]]>
 	</select>
 	
 	<!-- 최하위 CategoryNo와 keyword를 포함한 튜플을 찾는다. -->	
 	<select id="selectProductCount" resultType="long" parameterType="map">
 		<![CDATA[
-		select count(no)
-		from product
+			select count(no)
+			from product
 		]]>
 		<choose>
 			<when test="categoryNo == 0">
@@ -123,13 +123,13 @@
 	
 	<select id="selectSearchProductList" resultType="product" parameterType="map">
 		<![CDATA[
-		select a.no, a.name, a.description, a.consumer_price as 'consumerPrice', a.display_check as 'displayCheck', 
-		a.sale_check as 'saleCheck', a.complete_category as 'completeCategory', a.reg_date as 'regDate',
-		b.image_path as 'mainImage'
-		from product a, image b
+			select a.no, a.name, a.description, a.consumer_price as 'consumerPrice', a.display_check as 'displayCheck', 
+			a.sale_check as 'saleCheck', a.complete_category as 'completeCategory', a.reg_date as 'regDate',
+			b.image_path as 'mainImage'
+			from product a, image b
 		]]>
-		where a.no = b.product_no 
-		and b.main_image_check = 'Y'
+			where a.no = b.product_no 
+			and b.main_image_check = 'Y'
 		<choose>
 			<when test="categoryNo == 0">
         		and a.name like '%${keyword}%'
@@ -138,19 +138,19 @@
         		and a.category_no = #{categoryNo} and a.name like '%${keyword}%'
         	</otherwise>
         </choose>
-		order by a.no desc
-		limit #{showProductNum} offset #{startPageNum}
+			order by a.no desc
+			limit #{showProductNum} offset #{startPageNum}
 	</select>
 	
 	<update id="updateProduct" parameterType="product">
-		update product
-		set name=#{name}, material=#{material}, description=#{description},
-		detail_description = #{detailDescription}, supply_price = #{supplyPrice}, consumer_price =#{consumerPrice}, 
-		manufacturer=#{manufacturer}, supplier=#{supplier}, home=#{home}, manufacture_date =#{manufactureDate},
-		restock_check =#{restockCheck} , purchase_count =#{purchaseCount}, display_check =#{displayCheck},
-		sale_check =#{saleCheck}, hits =#{hits}, preference_score =#{preferenceScore}, post_priority =#{postPriority},
-		category_no =#{categoryNo}
-		where no = #{no}
+			update product
+			set name=#{name}, material=#{material}, description=#{description},
+			detail_description = #{detailDescription}, supply_price = #{supplyPrice}, consumer_price =#{consumerPrice}, 
+			manufacturer=#{manufacturer}, supplier=#{supplier}, home=#{home}, manufacture_date =#{manufactureDate},
+			restock_check =#{restockCheck} , purchase_count =#{purchaseCount}, display_check =#{displayCheck},
+			sale_check =#{saleCheck}, hits =#{hits}, preference_score =#{preferenceScore}, post_priority =#{postPriority},
+			category_no =#{categoryNo}
+			where no = #{no}
 	</update>
 	
 	

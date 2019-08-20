@@ -69,10 +69,8 @@ public class OrderContollerTest {
 	@Ignore
 	@Test
 	public void putOrderTest() throws Exception {
-
 		OrderVo orderVo = new OrderVo();
 		orderVo.setNo(5L);
-		orderVo.setOrderNo("ASD123215");
 		orderVo.setTitle("절개나시티 외 3개의 상품");
 		orderVo.setDescription("절개나시티및  반팔티 청바지등");
 		orderVo.setDestination("서울시 관악구 봉천로 13길 1");

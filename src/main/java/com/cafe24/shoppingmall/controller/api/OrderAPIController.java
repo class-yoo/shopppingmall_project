@@ -26,17 +26,23 @@ public class OrderAPIController {
 	@RequestMapping(value="", method=RequestMethod.POST)
 	public JSONResult add(@RequestBody OrderVo orderVo) {
 		
-		System.out.println(orderVo);
 		boolean orderAddResult = OrderService.add(orderVo);
-		
 		return JSONResult.success(orderAddResult);
 	}
 	
 	@ApiOperation(value = "주문목록보기")
 	@RequestMapping(value="/list/{userId}", method=RequestMethod.GET)
-	public JSONResult list(@PathVariable String userId) {
-		
+	public JSONResult getOrderListByUserId(@PathVariable String userId) {
 		List<OrderVo> orderAddResult = OrderService.getOrderListByUserId(userId);
+		return JSONResult.success(orderAddResult);
+	}
+	
+	
+	@ApiOperation(value = "주문목록보기")
+	@RequestMapping(value="/list", method=RequestMethod.GET)
+	public JSONResult list() {
+		
+		List<OrderVo> orderAddResult = OrderService.getOrderList();
 		
 		return JSONResult.success(orderAddResult);
 	}

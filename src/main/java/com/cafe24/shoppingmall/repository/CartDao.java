@@ -23,5 +23,9 @@ public class CartDao {
 		
 		return sqlSession.selectList("cart.selectCartListByUserId", userId);
 	}
+
+	public CartVo selectCartByCartNo(Long cartNo) {
+		return sqlSession.selectOne("cart.selectCartByCartNo", cartNo);
+	}
 	
 }

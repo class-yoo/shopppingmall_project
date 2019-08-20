@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cafe24.shoppingmall.dto.CartDTO;
 import com.cafe24.shoppingmall.dto.JSONResult;
 import com.cafe24.shoppingmall.service.CartService;
 import com.cafe24.shoppingmall.vo.CartVo;
@@ -26,13 +28,13 @@ public class CartAPIController {
 
 	@ApiOperation(value = "장바구니담기")
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public ResponseEntity<JSONResult> add(@RequestBody CartVo cartVo) {
+	public ResponseEntity<JSONResult> add(@RequestBody CartDTO cartDTO) {
 		
 		HttpStatus status = HttpStatus.OK;
 		String message = null;
 		JSONResult jsonResult = JSONResult.success(true);
 		
-		boolean putResult = cartService.put(cartVo);
+		boolean putResult = cartService.put(cartDTO);
 		
 		if(!putResult) {
 			status = HttpStatus.BAD_REQUEST;
@@ -51,6 +53,16 @@ public class CartAPIController {
 		
 		return JSONResult.success(list);
 	}
+	
+	@ApiOperation(value = "주문할 장바구니목록보기")
+	@RequestMapping(value = "/{cartNo}", method = RequestMethod.GET)
+	public JSONResult getCartByCartNo(@PathVariable Long cartNo) {
+		
+		CartVo cartVo = cartService.getCartByCartNo(cartNo);
+		
+		return JSONResult.success(cartVo);
+	}
+	
 	
 	
 	public ResponseEntity<JSONResult> makeResponseEntity(HttpStatus status, JSONResult jsonResult){

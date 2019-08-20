@@ -23,7 +23,7 @@ public class ProductDao {
 
 		return sqlSession.insert("product.insertProduct", productVo);
 	}
-
+	
 	public ProductVo selectProductByProductNo(Long productNo) {
 
 		return sqlSession.selectOne("product.selectProductByProductNo", productNo);

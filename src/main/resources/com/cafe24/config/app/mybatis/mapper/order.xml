@@ -4,6 +4,7 @@
 <mapper namespace="order">
 	<resultMap type="order" id="orderMap">
 		<id column="no" property="no"/>
+		<result column="receiver" property="receiver"/>
 		<result column="title" property="title"/>
 		<result column="description" property="description"/>
 		<result column="destination" property="destination"/>
@@ -49,11 +50,15 @@
 		<![CDATA[
 			insert
 			into orders
-			values(#{no}, #{title}, #{description}, AES_ENCRYPT(#{destination},'shop'), AES_ENCRYPT( #{detailAddress}, 'shop'),
-			#{postalCode}, #{requirement}, AES_ENCRYPT(#{phoneNumber}, 'shop'), AES_ENCRYPT( #{contact}, 'shop'), AES_ENCRYPT(#{email}, 'shop'),
-			sha(#{password}), #{orderStatus}, now(), #{refundBank}, AES_ENCRYPT(#{refundAccount},'shop'), #{totalPrice}, #{deliverStatus},
-			#{deliverNumber}, #{trackingNumber}, #{completeDeliverDate}, AES_ENCRYPT(#{userId}, 'shop'))
+			values(null, #{receiver}, #{title}, #{description}, AES_ENCRYPT(#{destination},'shop'), AES_ENCRYPT( #{detailAddress}, 'shop'),
+			'temp', #{requirement}, AES_ENCRYPT('temp', 'shop'), AES_ENCRYPT( #{contact}, 'shop'), AES_ENCRYPT('temp', 'shop'),
+			sha('temp'), '주문', now(), #{refundBank}, AES_ENCRYPT(#{refundAccount},'shop'), #{totalPrice}, '배송준비중',
+			'temp', 0 , 'temp', null, AES_ENCRYPT(#{userId}, 'shop'))
 		]]>
+		
+		<selectKey  keyProperty="no" resultType="long" order="AFTER">
+                SELECT LAST_INSERT_ID()
+        </selectKey>
 	</insert>
 	
 	<insert id="insertOrderProduct" parameterType="orderProduct">
@@ -66,10 +71,19 @@
 	
 	<select id="selectOrderListByUserId" resultType="order" parameterType="string">
 		<![CDATA[
-			select no, order_no as 'orderNo', title, order_status as 'orderStatus',
+			select no, receiver, order_no as 'orderNo', title, order_status as 'orderStatus',
 			order_date as 'orderDate', total_price as 'totalPrice' 
 			from orders
 			where user_id = AES_ENCRYPT(#{userId},'shop')
+		]]>
+	</select>
+	
+	
+	<select id="getOrderList" resultType="order" parameterType="string">
+		<![CDATA[
+			select no, receiver, title, order_status as 'orderStatus',
+			order_date as 'orderDate', total_price as 'totalPrice'
+			from orders
 		]]>
 	</select>
 	
@@ -90,8 +104,8 @@
 		<![CDATA[
 			select a.order_no , a.displayed_product_no, a.amount, a.price, 
 			b.code, b.name, b.option, b.main_image_path, b.price as 'diplayed_product_price', b.product_no
-			from shoppingmall.order_product a , shoppingmall.displayed_product b
-			where a.displayed_product_no = b.no and  order_no = #{orderNo}
+			from order_product a , displayed_product b
+			where a.displayed_product_no = b.no and  a.order_no = #{orderNo}
 		]]>
 	</select>
 	
